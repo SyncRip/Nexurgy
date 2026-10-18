@@ -1,0 +1,251 @@
+/* Approval centre, request detail and the shell badge. Tokens only. */
+
+/* ─── shell entry ────────────────────────────────────────── */
+.ap-rail-link {
+  position: relative;
+}
+.ap-nav-badge {
+  display: inline-grid;
+  place-items: center;
+  min-width: 18px;
+  height: 18px;
+  margin-left: auto;
+  padding: 0 5px;
+  border-radius: 9px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-family: var(--font-mono);
+  font-size: var(--fs-11);
+  font-weight: 600;
+  line-height: 1;
+}
+.ap-drawer-link .ap-nav-badge {
+  margin-left: auto;
+}
+@media (min-width: 768px) and (max-width: 1100px) {
+  /* compact rail: labels hidden, the badge sits on the icon */
+  .ap-rail-link .ap-nav-badge {
+    position: absolute;
+    top: 1px;
+    right: 4px;
+    min-width: 15px;
+    height: 15px;
+    padding: 0 3px;
+    font-size: 9.5px;
+  }
+}
+
+/* ─── list ───────────────────────────────────────────────── */
+.ap-yours {
+  height: 20px;
+  font-size: var(--fs-11);
+}
+.ap-table td a {
+  color: var(--text);
+}
+.ap-table td a:hover {
+  color: var(--measure);
+}
+.ap-tab-intro {
+  align-items: flex-start;
+}
+
+/* ─── detail ─────────────────────────────────────────────── */
+.ap-title {
+  overflow-wrap: anywhere;
+}
+.ap-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
+  gap: var(--sp-4);
+  align-items: start;
+}
+.ap-main {
+  min-width: 0;
+}
+.ap-side {
+  position: sticky;
+  top: calc(var(--top-h) + 12px);
+  min-width: 0;
+}
+.ap-side .as-facts {
+  grid-template-columns: minmax(0, 1fr);
+}
+.ap-decide {
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--line));
+}
+.ap-instructions {
+  margin: 4px 0 0;
+  padding: 8px 10px;
+  border-left: 2px solid var(--measure);
+  background: var(--surface-2);
+  border-radius: 0 var(--r-1) var(--r-1) 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: var(--fs-13);
+}
+.ap-note {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.ap-version-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.ap-version-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  color: var(--text);
+  text-decoration: none;
+}
+.ap-version-link:hover {
+  color: var(--measure);
+}
+.ap-version-link svg {
+  width: 14px;
+  height: 14px;
+  color: var(--text-3);
+  flex: none;
+}
+.ap-task-title {
+  font-size: var(--fs-16);
+}
+
+.ap-crits,
+.ap-items,
+.ap-baseline,
+.ap-history,
+.ap-reasons {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.ap-reasons {
+  gap: 2px;
+  list-style: disc;
+  padding-left: 18px;
+}
+.ap-crit,
+.ap-item {
+  display: grid;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  background: var(--surface-2);
+  min-width: 0;
+}
+.ap-crit-head,
+.ap-item-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+.ap-evidence {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-right: 8px;
+  color: var(--text);
+  text-decoration: none;
+}
+.ap-evidence svg {
+  width: 13px;
+  height: 13px;
+  color: var(--text-3);
+}
+.ap-evidence:hover {
+  color: var(--measure);
+}
+.ap-baseline li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.ap-check-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 8px;
+}
+.ap-check {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  justify-items: start;
+  padding: 8px 10px;
+  border: 1px dashed var(--line-2);
+  border-radius: var(--r-1);
+  background: var(--surface);
+  min-width: 0;
+}
+.ap-check-h {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: var(--fs-11);
+  font-weight: 600;
+}
+.ap-problems {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  font-size: var(--fs-12);
+  width: 100%;
+}
+.ap-problems li {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.ap-problems svg {
+  width: 13px;
+  height: 13px;
+  flex: none;
+  margin-top: 2px;
+}
+.ap-problems.err svg {
+  color: var(--err);
+}
+.ap-problems.warn svg {
+  color: var(--warn);
+}
+.ap-problems li > span {
+  flex: 1;
+  min-width: 0;
+}
+.ap-history li {
+  display: grid;
+  gap: 4px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+.ap-history li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+@media (max-width: 1100px) {
+  .ap-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ap-side {
+    position: static;
+  }
+}
+
+/* error codes inside stacked callouts keep their own width */
+.callout .stack-sm > code.error-code {
+  justify-self: start;
+}

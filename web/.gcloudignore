@@ -1,0 +1,6 @@
+# Uploaded to Cloud Build: sources only; the image runs `npm ci` and builds itself.
+.gcloudignore
+node_modules/
+dist/
+*.local
+*.tsbuildinfo

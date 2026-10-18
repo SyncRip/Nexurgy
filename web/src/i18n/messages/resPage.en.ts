@@ -1,0 +1,112 @@
+// English messages of the resources & knowledge redesign (resPage). Keys must match resPage.zh.ts.
+export const resPageEn = {
+  'rp.backMaterials': 'Back to materials',
+  'rp.filters.active': 'Active filters',
+  'rp.filters.remove': 'Remove filter: {label}',
+  'rp.filters.search': 'Search: {q}',
+  // page & views
+  'rp.subtitle': 'Find and manage drawings, models and engineering materials.',
+  'rp.scope.explain': 'About this scope',
+  'rp.scope.ownership': 'Choose the destination project when adding materials. Viewing all projects does not change ownership.',
+  'rp.preview.navigation': 'Browse filtered materials',
+  'rp.preview.previous': 'Previous material (↑)',
+  'rp.preview.next': 'Next material (↓)',
+  'rp.views': 'Resource views',
+  'rp.view.files': 'Materials',
+  'rp.view.knowledge': 'Experience',
+  'rp.view.process': 'Usage records',
+  'rp.count.partial': '{count}+',
+
+  // scope panel
+  'rp.scope.region': 'Choose the view scope',
+  'rp.scope.label': 'View scope',
+  'rp.scope.groupProjects': 'Projects',
+  'rp.scope.groupCross': 'Across projects',
+  'rp.scope.projectOption': '{name} · {code}',
+  'rp.scope.projectOptionArchived': '{name} · {code} (archived)',
+  'rp.scope.all': 'All project materials',
+  'rp.scope.project.title': 'Project materials · {code}',
+  'rp.scope.project.titleExp': 'Project experience · {code}',
+  'rp.scope.project.desc': 'Files, engineering objects and task outputs saved in this project.',
+  'rp.scope.project.descExp': 'Workflows this project archived as experience, with their results, inputs and fixed versions.',
+  'rp.scope.all.title': 'Across projects',
+  'rp.scope.all.desc': 'Materials of every project you can access.',
+  'rp.scope.all.descExp': 'Experience archived by every project; you choose the target project when you adopt one.',
+  'rp.scope.taskResults': 'Project task results',
+  'rp.scope.taskResultsOf': 'Project task results of {name}',
+
+  // scope fallback notices
+  'rp.notice.url_project': 'The project in the link does not exist or you cannot access it. Showing "{scope}" instead.',
+  'rp.notice.url_invalid': 'The view scope in the link is not valid. Showing "{scope}" instead.',
+  'rp.notice.saved_project': 'The project you viewed last time is no longer available. Showing "{scope}" instead.',
+  'rp.notice.dismiss': 'Dismiss the notice',
+
+  // toolbar
+  'rp.search.label': 'Search materials',
+  'rp.search.placeholder': 'Name, drawing number or file name',
+  'rp.filter.type': 'Material type',
+  'rp.filter.allTypes': 'All types',
+  'rp.filter.creation': 'Created by',
+  'rp.filter.allCreation': 'All creation methods',
+  'rp.filter.part': 'Linked part',
+  'rp.filter.allParts': 'All parts',
+  'rp.filter.status': 'Status',
+  'rp.filter.allStatus': 'All statuses',
+  'rp.filter.subtype': 'Kind: {kind}',
+  'rp.filter.removeSubtype': 'Remove the "{kind}" filter',
+  'rp.more': 'More',
+  'rp.more.archived': 'Show archived materials',
+  'rp.more.records': 'Usage records in this scope',
+  'rp.more.recordsNeedProject': 'Usage records are kept per project. Choose a project in "View scope" first.',
+  'rp.more.clear': 'Clear filters',
+
+
+  // list heading & load state
+  'rp.count_one': '{count} material',
+  'rp.count_other': '{count} materials',
+  'rp.list.note': 'The list shows the latest version; earlier versions are in the detail.',
+  'rp.load.status': 'Loaded {loaded} of {total} projects',
+  'rp.load.loading': 'Loading {count} more…',
+  'rp.load.failed': 'Not loaded:',
+  'rp.load.retry': 'Retry {code}',
+  'rp.load.truncated': '{code}: only the first part of {sources} is listed.',
+  'rp.load.projectFailed': 'Could not load the materials of this project.',
+  'rp.source.specs': 'engineering specs',
+  'rp.source.task_outputs': 'task records (creation method, task formal versions)',
+
+  // table
+  'rp.table.caption': 'Materials in the view scope',
+  'rp.col.name': 'Name',
+  'rp.col.type': 'Type',
+  'rp.col.creation': 'Created by',
+  'rp.col.project': 'Project',
+  'rp.col.version': 'Latest version',
+  'rp.col.preview': 'View online',
+  'rp.col.updated': 'Updated',
+  'rp.col.actions': 'Actions',
+  'rp.row.view': 'View',
+  'rp.row.open': 'Open {name}',
+  'rp.noVersion': 'No version yet',
+  'rp.chip.deprecated': 'Deprecated',
+  'rp.chip.upstream': 'Upstream newer',
+  'rp.chip.failed': 'Failed',
+  'rp.chip.formal': 'Task formal {label}',
+  'rp.chip.formalTitle': 'Formal output accepted by task {tasks}: {label} (not the latest version)',
+
+  // empty & special states
+  'rp.empty.title': 'No materials yet',
+  'rp.empty.body': 'Add material, or switch the view scope to look in other projects.',
+  'rp.empty.archivedHint': 'Archived materials can be shown under "More".',
+  'rp.noMatch.title': 'No materials found',
+  'rp.noMatch.body': 'Try other keywords or clear the filters. Archived materials can be shown under "More".',
+  'rp.item.missing': 'The material in the link was not found in this scope. It may have been removed, or it belongs to a project that is not loaded.',
+
+  // usage records
+  'rp.records.back': 'Back to materials',
+  'rp.records.title': 'Usage records',
+  'rp.records.sub': "Where each exact material version was used in this project's tasks — as input, candidate or formal result.",
+  'rp.records.needProject.title': 'Usage records are kept per project',
+  'rp.records.needProject.body': 'Choose a project in "View scope" above to see its usage records.',
+} as const;
+
+export type ResPageKey = keyof typeof resPageEn;

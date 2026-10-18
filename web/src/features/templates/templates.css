@@ -1,0 +1,503 @@
+/* Workflow templates (P3): template detail, start-run dialog, execution monitor,
+   run context panels, template library. Tokens only (tokens.css), so dark and
+   light themes follow automatically. */
+
+/* ─── vocabulary ─────────────────────────────────────────── */
+.tpl-vno {
+  display: inline-grid;
+  place-items: center;
+  min-width: 26px;
+  height: 20px;
+  padding: 0 6px;
+  border: 1px solid var(--line-2);
+  border-radius: 3px;
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: var(--fs-12);
+  font-weight: 600;
+  line-height: 1;
+  vertical-align: middle;
+}
+.tpl-chips {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+.tpl-ref {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  max-width: 100%;
+  color: inherit;
+}
+a.tpl-ref:hover .ellip,
+a.tpl-ref:hover {
+  color: var(--accent);
+}
+.tpl-req {
+  color: var(--warn);
+  font-weight: 600;
+}
+.tpl-pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.tpl-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+.tpl-purpose-cell {
+  max-width: 360px;
+}
+.tpl-h2 {
+  font-size: var(--fs-16);
+  font-weight: 600;
+}
+.tpl-xs {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+.tpl-policy {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+.tpl-gates {
+  color: var(--text-2);
+}
+.tpl-rot {
+  transform: rotate(180deg);
+}
+.tpl-more {
+  display: flex;
+  justify-content: center;
+  padding: 4px 0 8px;
+}
+
+.tpl-save-run {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  max-width: 100%;
+}
+.tpl-save-run > .btn {
+  justify-self: start;
+}
+.tpl-save-run > .callout {
+  max-width: 360px;
+  flex-wrap: wrap;
+}
+.tpl-save-run > .callout > .grow {
+  flex: 1 1 160px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* key / value grid */
+.tpl-kv {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 8px 16px;
+  margin: 0;
+}
+.tpl-kv.one {
+  grid-template-columns: 1fr;
+}
+.tpl-kv > div {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+.tpl-kv .span-2 {
+  grid-column: 1 / -1;
+}
+.tpl-kv dt {
+  font-size: var(--fs-11);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-3);
+}
+.tpl-kv dd {
+  margin: 0;
+  font-size: var(--fs-13);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* problem lists (publish checks, input quality) */
+.tpl-issues {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--fs-13);
+}
+.tpl-issues li {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.tpl-issues svg {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  margin-top: 2px;
+  color: var(--err);
+}
+.tpl-issues.warn svg,
+.tpl-issues li.gate svg {
+  color: var(--warn);
+}
+
+/* ─── template detail page ───────────────────────────────── */
+.tpl-page {
+  display: grid;
+  gap: var(--sp-4);
+  align-content: start;
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 18px clamp(14px, 2.4vw, 32px) 48px;
+  min-width: 0;
+}
+/* Configure tab: the canvas fills the rest of the viewport (desktop). */
+.tpl-page.is-config {
+  max-width: none;
+  padding: 0;
+  gap: 0;
+  height: calc(100dvh - var(--top-h));
+  grid-template-rows: auto minmax(0, 1fr);
+}
+.tpl-page.is-config .tpl-head {
+  padding: 10px 14px 0;
+  background: var(--surface);
+}
+.tpl-page.is-config .tpl-editor-slot .wf-editor {
+  height: 100%;
+  min-height: 0;
+}
+.tpl-editor-slot {
+  min-height: 0;
+  min-width: 0;
+}
+.tpl-editor-slot[hidden] {
+  display: none;
+}
+.tpl-head {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+.tpl-title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  min-width: 0;
+}
+.tpl-titles {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  max-width: 100%;
+}
+.tpl-titles h1 {
+  font-size: var(--fs-20);
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+}
+.tpl-head-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.tpl-tabs {
+  margin-bottom: 0;
+}
+.tpl-tab-count {
+  font-size: var(--fs-11);
+  color: var(--text-3);
+}
+.tpl-dirty-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--warn);
+}
+.tpl-body {
+  min-width: 0;
+}
+.tpl-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: var(--sp-4);
+  align-items: start;
+}
+.tpl-actions {
+  display: grid;
+  gap: 8px;
+}
+.tpl-actions .btn {
+  justify-content: center;
+}
+.tpl-rules {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.tpl-rules[disabled] {
+  opacity: 0.6;
+}
+.tpl-radio-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.tpl-radio-row > legend,
+.tpl-rules > legend {
+  margin-bottom: 6px;
+}
+.tpl-contract {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px 20px;
+}
+.tpl-contract h4 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.tpl-io-list {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tpl-io-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  min-width: 0;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--line);
+  overflow-wrap: anywhere;
+}
+.tpl-io-list li:last-child {
+  border-bottom: 0;
+}
+.tpl-io-node {
+  min-width: 120px;
+}
+.tpl-version-detail {
+  padding: 6px 4px 10px 36px;
+}
+
+/* ─── start-run dialog ───────────────────────────────────── */
+.tpl-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--fs-13);
+  font-weight: 600;
+}
+.tpl-step-n {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: var(--fs-11);
+  font-weight: 700;
+}
+.tpl-choice {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.tpl-fixed {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  background: var(--surface-2);
+  overflow-wrap: anywhere;
+}
+.tpl-input,
+.tpl-param-node {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 10px 12px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  min-width: 0;
+}
+.tpl-input.is-missing {
+  border-color: var(--err);
+}
+.tpl-input-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  padding: 0 4px;
+  max-width: 100%;
+}
+.tpl-input-current {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.tpl-params > summary {
+  cursor: pointer;
+  padding: 6px 0;
+}
+.tpl-params[open] > summary {
+  margin-bottom: 6px;
+}
+.tpl-foot-note {
+  margin-right: auto;
+  align-self: center;
+  color: var(--err);
+}
+.tpl-pick-list {
+  display: grid;
+  gap: 4px;
+}
+.tpl-pick-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  cursor: pointer;
+  min-width: 0;
+}
+.tpl-pick-row.selected {
+  border-color: var(--measure);
+  background: var(--measure-soft);
+}
+
+/* ─── execution monitor ──────────────────────────────────── */
+.tpl-mon-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  min-height: 40px;
+}
+.tpl-presets {
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+.tpl-filters .select {
+  max-width: 220px;
+}
+
+/* ─── run page ───────────────────────────────────────────── */
+.tpl-run-extra {
+  display: grid;
+  gap: 4px;
+}
+.tpl-reruns {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+.tpl-run-panels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.tpl-panel-ico {
+  width: 15px;
+  height: 15px;
+  color: var(--measure);
+}
+.tpl-vline {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+  min-width: 0;
+}
+
+/* ─── library ────────────────────────────────────────────── */
+.tpl-lib-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+}
+.tpl-lib-card {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  padding: 14px;
+}
+.tpl-lib-card-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.tpl-lib-name {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* ─── narrow screens ─────────────────────────────────────── */
+@media (max-width: 1000px) {
+  .tpl-page.is-config {
+    height: auto;
+    display: block;
+  }
+  .tpl-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 767px) {
+  .tpl-choice,
+  .tpl-run-panels {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .tpl-filters .select {
+    max-width: none;
+    flex: 1 1 140px;
+  }
+  .tpl-version-detail {
+    padding-left: 4px;
+  }
+  .tpl-io-node {
+    min-width: 0;
+  }
+}

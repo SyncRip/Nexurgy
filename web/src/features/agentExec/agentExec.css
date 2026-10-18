@@ -1,0 +1,694 @@
+/* Agent execution pages (agent execution layer P1, docs/agent/prototype.html #exec / #executions / #run).
+   Tokens only (dark + light come from tokens.css); every class is prefixed ax-. */
+
+.ax-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--measure);
+  display: inline-block;
+  flex: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  :root:not([data-motion='reduced']) .ax-pulse {
+    animation: ax-pulse 1.6s ease-in-out infinite;
+  }
+}
+@keyframes ax-pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* ─── header ─────────────────────────────────────────── */
+.ax-head {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+}
+.ax-head-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.ax-head-titles {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  flex: 1 1 360px;
+}
+.ax-head-titles h1 {
+  font-size: var(--fs-20);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+}
+.ax-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.ax-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  font-size: var(--fs-12);
+  color: var(--text-2);
+  min-width: 0;
+}
+.ax-meta > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.ax-meta svg {
+  width: 14px;
+  height: 14px;
+  flex: none;
+}
+.ax-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ─── layout ─────────────────────────────────────────── */
+.ax-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 16px;
+  align-items: start;
+}
+@media (max-width: 1100px) {
+  .ax-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.ax-side {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+
+/* ─── timeline ───────────────────────────────────────── */
+.ax-tl-card {
+  display: grid;
+  min-width: 0;
+}
+.ax-tl-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+}
+.ax-tl-tools h2 {
+  font-size: var(--fs-13);
+  font-weight: 600;
+}
+.ax-fchip {
+  border: 1px solid var(--line-2);
+  background: var(--surface);
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: var(--fs-12);
+  color: var(--text-2);
+  cursor: pointer;
+}
+.ax-fchip[aria-pressed='true'] {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+}
+.ax-conn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-12);
+  color: var(--text-3);
+}
+.ax-conn.warn {
+  color: var(--warn);
+}
+.ax-conn.err {
+  color: var(--err);
+}
+.ax-conn svg {
+  width: 14px;
+  height: 14px;
+}
+.ax-tl-scroll {
+  position: relative;
+  max-height: min(72vh, calc(100dvh - 260px));
+  min-height: 160px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.ax-tl-scroll.is-compact {
+  max-height: none;
+  min-height: 0;
+  overflow: visible;
+}
+.ax-tl {
+  list-style: none;
+  margin: 0;
+  padding: 12px 0 2px;
+}
+.ax-ev {
+  position: relative;
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 10px;
+  padding: 0 14px 14px;
+}
+.ax-ev::before {
+  content: '';
+  position: absolute;
+  left: 29px;
+  top: 30px;
+  bottom: 0;
+  border-left: 1px solid var(--line);
+}
+.ax-ev:last-child::before {
+  display: none;
+}
+.ax-ev-ic {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--surface-3);
+  color: var(--text-2);
+  position: relative;
+  z-index: var(--z-raised);
+}
+.ax-ev-ic svg {
+  width: 15px;
+  height: 15px;
+}
+.ax-ev.tone-tool .ax-ev-ic {
+  background: var(--measure-soft);
+  color: var(--measure);
+}
+.ax-ev.tone-msg .ax-ev-ic {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.ax-ev.tone-need .ax-ev-ic {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+.ax-ev.tone-ok .ax-ev-ic {
+  background: var(--ok-soft);
+  color: var(--ok);
+}
+.ax-ev.tone-err .ax-ev-ic {
+  background: var(--err-soft);
+  color: var(--err);
+}
+.ax-ev-main {
+  min-width: 0;
+  padding: 4px 6px 0;
+  margin: 0 -6px;
+  display: grid;
+  gap: 5px;
+  border-radius: var(--r-2);
+  transition: background var(--dur-slow) var(--ease);
+}
+.ax-ev.flash .ax-ev-main {
+  background: var(--accent-soft);
+}
+.ax-ev-head {
+  display: flex;
+  gap: 6px 8px;
+  align-items: baseline;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+.ax-ev-label {
+  font-size: var(--fs-12);
+  color: var(--text-3);
+}
+.ax-ev-title {
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.ax-ev-head time,
+.ax-ev-dur {
+  font-family: var(--font-mono);
+  font-size: var(--fs-11);
+  color: var(--text-3);
+}
+.ax-ev-head time {
+  margin-left: auto;
+}
+.ax-ev-body {
+  color: var(--text-2);
+  font-size: var(--fs-13);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.ax-ev-res {
+  font-size: var(--fs-13);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  padding: 6px 10px;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+.ax-ev-res.err {
+  border-color: var(--err-soft);
+}
+.ax-ev details > summary {
+  cursor: pointer;
+  font-size: var(--fs-12);
+  color: var(--text-3);
+}
+.ax-ev pre,
+.ax-json {
+  margin: 4px 0 0;
+  max-height: 260px;
+  overflow: auto;
+  font-family: var(--font-mono);
+  font-size: var(--fs-12);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  padding: 8px 10px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.ax-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-11);
+  color: var(--text-3);
+}
+.ax-produced {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  font-size: var(--fs-12);
+  color: var(--text-2);
+}
+.ax-produced svg {
+  width: 14px;
+  height: 14px;
+}
+.ax-qs {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 4px;
+  font-size: var(--fs-13);
+}
+.ax-crit {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--fs-12);
+}
+.ax-crit li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  align-items: baseline;
+}
+.ax-crit .cl-evidence {
+  flex-basis: 100%;
+  font-size: var(--fs-11);
+}
+.ax-crit .cl-evidence-list {
+  margin: 4px 0 0;
+  padding-left: 14px;
+  overflow-wrap: anywhere;
+}
+.ax-waiting {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px 16px 25px;
+  color: var(--text-3);
+  font-size: var(--fs-12);
+}
+.ax-tl-empty {
+  padding: 18px 14px;
+  color: var(--text-3);
+  font-size: var(--fs-13);
+}
+.ax-newpill {
+  position: sticky;
+  bottom: 12px;
+  display: block;
+  margin: 0 auto 10px;
+  width: max-content;
+  max-width: calc(100% - 24px);
+  background: var(--text);
+  color: var(--bg);
+  border: 0;
+  border-radius: 999px;
+  padding: 5px 14px;
+  font-size: var(--fs-12);
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  z-index: var(--z-sticky);
+}
+
+/* ─── budget meters ──────────────────────────────────── */
+.ax-meters {
+  display: grid;
+  gap: 12px;
+}
+.ax-meter-h {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: var(--fs-12);
+}
+.ax-meter-h > span:first-child {
+  color: var(--text-2);
+}
+.ax-meter-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--surface-3);
+  overflow: hidden;
+  margin-top: 4px;
+}
+.ax-meter-bar i {
+  display: block;
+  height: 100%;
+  background: var(--measure);
+  border-radius: 3px;
+}
+.ax-meter-bar i.warm {
+  background: var(--warn);
+}
+.ax-meter-bar i.hot {
+  background: var(--err);
+}
+.ax-meter-note {
+  font-size: var(--fs-11);
+  color: var(--text-3);
+  margin-top: 2px;
+}
+
+/* ─── side lists ─────────────────────────────────────── */
+.ax-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--fs-13);
+}
+.ax-list > li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  min-width: 0;
+}
+.ax-list > li.is-current {
+  font-weight: 500;
+}
+.ax-vlink {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  max-width: 100%;
+}
+.ax-vlink svg {
+  width: 12px;
+  height: 12px;
+  flex: none;
+}
+.ax-vlink.is-plain {
+  color: var(--text-2);
+}
+.ax-linkbtn {
+  border: 0;
+  background: none;
+  padding: 0;
+  color: var(--measure);
+  cursor: pointer;
+  font-size: var(--fs-12);
+}
+.ax-linkbtn:hover {
+  text-decoration: underline;
+}
+
+/* ─── compact panel (node "execution" tab) ───────────── */
+.ax-proc {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+.ax-proc h4 {
+  font-size: var(--fs-12);
+  font-weight: 600;
+  color: var(--text-2);
+  margin-bottom: 4px;
+}
+.ax-proc .ax-ev {
+  padding: 0 0 12px;
+}
+.ax-proc .ax-ev::before {
+  left: 15px;
+}
+.ax-now {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--fs-13);
+  min-width: 0;
+}
+.ax-now span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ─── workbench "agents at work" ─────────────────────── */
+.ax-live {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ax-live-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 6px 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  background: var(--surface-2);
+}
+.ax-live-item .who {
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.ax-live-item .acts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  justify-content: flex-end;
+}
+.ax-live-item .what {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font-size: var(--fs-12);
+  color: var(--text-2);
+  min-width: 0;
+}
+.ax-live-item .what > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ax-live-item .what a {
+  margin-left: auto;
+  white-space: nowrap;
+}
+.ax-todo-group {
+  display: grid;
+  gap: 4px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+.ax-todo-group h3 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-12);
+  font-weight: 500;
+  color: var(--text-3);
+}
+.ax-todo-group h3 svg {
+  width: 14px;
+  height: 14px;
+}
+.ax-todo-empty {
+  font-size: var(--fs-12);
+  color: var(--text-3);
+}
+
+/* ─── executions list ────────────────────────────────── */
+.ax-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  align-items: center;
+}
+.ax-filters label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-12);
+  color: var(--text-3);
+}
+.ax-table tbody tr {
+  cursor: pointer;
+}
+.ax-table tbody tr:hover td {
+  background: var(--surface-2);
+}
+.ax-table .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ─── agent wall additions ───────────────────────────── */
+.ag-wall-card > .ax-card-stats {
+  grid-column: 2;
+}
+.ax-card-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  border-top: 1px solid var(--line);
+  padding-top: 8px;
+  width: 100%;
+}
+.ax-card-stats > span {
+  display: grid;
+}
+.ax-card-stats b.faint {
+  color: var(--text-3);
+}
+.ax-card-stats b {
+  font-size: var(--fs-14);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.ax-card-stats > span > span {
+  font-size: var(--fs-11);
+  color: var(--text-3);
+}
+
+/* runtime choice cards in the profile editor: the tag chip wraps under a long name */
+.ax-rt-card .ag-card-title {
+  flex-wrap: wrap;
+}
+
+/* ─── capability rows (profile editor, diagnose dialog) ─ */
+.ax-cap {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: start;
+  padding: 7px 0;
+  border-bottom: 1px dashed var(--line);
+  font-size: var(--fs-13);
+}
+.ax-cap:last-child {
+  border-bottom: 0;
+}
+.ax-cap > svg {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+}
+.ax-cap.ok > svg {
+  color: var(--ok);
+}
+.ax-cap.warn > svg {
+  color: var(--warn);
+}
+.ax-cap.err > svg {
+  color: var(--err);
+}
+.ax-cap.pending > svg {
+  color: var(--text-3);
+}
+.ax-cap small {
+  display: block;
+  color: var(--text-3);
+  font-size: var(--fs-12);
+}
+
+/* ─── historical workspace events: commands and file changes ─── */
+.ax-ev pre.ax-cmd {
+  margin: 0;
+  max-height: 140px;
+}
+.ax-cmd > span {
+  color: var(--text-3);
+  user-select: none;
+}
+.ax-add,
+.ax-diff .add {
+  color: var(--ok);
+}
+.ax-del,
+.ax-diff .del {
+  color: var(--err);
+}
+@media (max-width: 760px) {
+  .ax-head {
+    padding: 12px;
+  }
+  .ax-tl-scroll {
+    max-height: 70dvh;
+  }
+  .ax-ev {
+    padding: 0 10px 12px;
+  }
+  .ax-ev::before {
+    left: 25px;
+  }
+  .ax-tl-tools {
+    padding: 10px;
+  }
+}
+
+/* The run title is the collaboration demand, often a paragraph: two lines in the identity bar, full text on hover. */
+.ax-run-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

@@ -1,0 +1,63 @@
+/* Experience view of resources & knowledge (all-projects load status) and the usage choice of the
+   knowledge adopt panel. Tokens only, so dark and light themes follow automatically. */
+
+/* ─── per-project load status (all projects) ───────────── */
+.rx-load .callout {
+  margin: 0;
+}
+.rx-load-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+.rx-load-list > li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+/* ─── adopt panel: usage (reference / adopt as task input) ─ */
+.rx-usage {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  min-width: 0;
+}
+.rx-usage > legend {
+  padding: 0 4px;
+  font-size: var(--fs-12);
+  font-weight: 500;
+  color: var(--text-2);
+}
+.rx-usage-opt {
+  align-items: flex-start;
+  white-space: normal;
+  line-height: 1.45;
+  min-height: 32px;
+}
+.rx-usage-opt input {
+  margin-top: 3px;
+  flex: none;
+}
+.rx-usage-opt > span {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+}
+.rx-usage-opt b {
+  color: var(--text);
+  font-weight: 600;
+}
+.rx-usage:disabled .rx-usage-opt,
+.rx-usage-opt:has(input:disabled) {
+  cursor: not-allowed;
+  opacity: 0.65;
+}

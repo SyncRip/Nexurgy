@@ -1,0 +1,45 @@
+/* W8 chain values (spec → assembly → drawings → delivery) on the run canvas, in the node drawer and in AI workspace
+   operation cards. Status always has a text chip next to its colour. */
+
+.orch-val { min-width: 0; }
+.orch-val .row { gap: 6px; align-items: center; }
+.orch-val .wrap { flex-wrap: wrap; }
+.orch-kind { display: inline-flex; align-items: center; gap: 4px; font-weight: 600; font-size: 12px; }
+.orch-kind svg { width: 14px; height: 14px; }
+.orch-link { display: inline-flex; align-items: center; gap: 3px; font-size: 12px; }
+.orch-link svg { width: 12px; height: 12px; }
+.orch-defs { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.orch-defs li { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 12px; min-width: 0; }
+.orch-q { flex-basis: 100%; padding-left: 8px; border-left: 2px solid var(--warn, #f5b93b); }
+.orch-questions ul, .orch-missing ul { margin: 2px 0 0; padding-left: 18px; font-size: 12px; }
+.orch-chain { display: grid; gap: 10px; }
+.orch-chain > * + * { border-top: 1px dashed var(--line, rgba(127, 127, 127, 0.25)); padding-top: 8px; }
+.err-text { color: var(--err, #e5484d); }
+/* generation supplement B: coverage of an assembly build (target vs actual, missing items by stage) */
+.cov { min-width: 0; }
+.cov-line { overflow-wrap: anywhere; }
+.cov-missing { display: grid; gap: 4px; }
+.cov-group ul { margin: 2px 0 0; padding-left: 18px; font-size: 12px; display: grid; gap: 2px; }
+.cov-group li { overflow-wrap: anywhere; }
+.cov-stage { font-weight: 600; }
+.cov-recovery { display: block; color: var(--text-2, inherit); padding-left: 8px; border-left: 2px solid var(--line, rgba(127, 127, 127, 0.35)); }
+.asm-coverage details > summary { cursor: pointer; }
+.asm-coverage .cov { margin-top: 4px; }
+/* generation supplement E: layered delivery (sub-assembly packages, per-level STEP / DWG status) */
+.lv, .lv-subs { display: grid; gap: 2px; min-width: 0; }
+.lv-subs ul, .lv-lines { margin: 2px 0 0; padding-left: 18px; font-size: 12px; display: grid; gap: 2px; }
+.lv-subs li { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; min-width: 0; }
+.lv-gap { color: var(--warn, #b7791f); }
+.lv details > summary { cursor: pointer; }
+.lv-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 4px; }
+.lv-table th, .lv-table td { text-align: left; padding: 2px 6px 2px 0; vertical-align: top; overflow-wrap: anywhere; }
+.lv-table .error-code { margin-left: 4px; }
+@media (max-width: 480px) {
+  .orch-defs li { font-size: 11px; }
+}
+/* generation reliability N: object state badge, per-level states, Turbo boundary note, execution context line */
+.st-levels { display: inline-flex; flex-wrap: wrap; gap: 4px; align-items: center; min-width: 0; }
+.st-checks { display: inline-flex; align-items: center; gap: 4px; min-width: 0; overflow-wrap: anywhere; }
+.st-checks svg { width: 13px; height: 13px; flex: none; }
+.st-ctx { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin: 2px 0 0; min-width: 0; }
+.st-ctx .ellip { max-width: 100%; }

@@ -1,0 +1,112 @@
+name: nexurgy
+
+# The API, initializer, and worker share one image, settings, and blob volume.
+# All defaults are fictional values for an isolated local demo.
+x-backend: &backend
+  image: nexurgy-server:local
+  platform: linux/amd64
+  build:
+    context: ./server
+    dockerfile: Dockerfile
+  init: true
+  environment:
+    PARTROUTE_ENV: dev
+    PARTROUTE_DATABASE_URL: "postgresql+psycopg://nexurgy:${NEXURGY_DB_PASSWORD:-nexurgy-local-db-only}@db:5432/nexurgy"
+    PARTROUTE_STORAGE_BACKEND: local
+    PARTROUTE_STORAGE_DIR: /app/var/blobs
+    PARTROUTE_INLINE_WORKER: "false"
+    PARTROUTE_WORKER_THREADS: "2"
+    PARTROUTE_AGENT_THREADS: "1"
+    PARTROUTE_ASSISTANT_THREADS: "2"
+    PARTROUTE_AI_SIMULATION: "${NEXURGY_AI_SIMULATION:-true}"
+    PARTROUTE_SEED_PASSWORD: "${NEXURGY_DEMO_PASSWORD:-nexurgy-local-demo-only}"
+    PARTROUTE_CORS_ORIGINS: "http://localhost:${NEXURGY_WEB_PORT:-8080},http://127.0.0.1:${NEXURGY_WEB_PORT:-8080}"
+    PARTROUTE_MAX_UPLOAD_MB: "50"
+    PARTROUTE_FEATURE_COLLABORATION: "false"
+    PARTROUTE_FEATURE_TASKS: "false"
+    PARTROUTE_FEATURE_STAGES: "false"
+    PARTROUTE_FEATURE_PROCESS_MODULES: "false"
+    PARTROUTE_FEATURE_TEMPLATE_LIBRARY: "false"
+    PARTROUTE_FEATURE_TURBO_CHOICE: "false"
+    PARTROUTE_FEATURE_MODEL_CHOICE: "false"
+    GEMINI_API_KEY: "${NEXURGY_GEMINI_API_KEY:-}"
+    OPENAI_API_KEY: "${NEXURGY_OPENAI_API_KEY:-}"
+    PARTROUTE_CREDENTIAL_KEYS: "${NEXURGY_CREDENTIAL_KEYS:-}"
+  volumes:
+    - blobs:/app/var/blobs
+  stop_grace_period: 60s
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: nexurgy
+      POSTGRES_PASSWORD: "${NEXURGY_DB_PASSWORD:-nexurgy-local-db-only}"
+      POSTGRES_DB: nexurgy
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nexurgy -d nexurgy"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+    restart: unless-stopped
+
+  initialize:
+    <<: *backend
+    command: ["sh", "-ec", "alembic upgrade heads && python -m app.seed"]
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+
+  api:
+    <<: *backend
+    depends_on:
+      db:
+        condition: service_healthy
+      initialize:
+        condition: service_completed_successfully
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/healthz', timeout=5).read()"
+      interval: 15s
+      timeout: 10s
+      retries: 12
+      start_period: 60s
+    restart: unless-stopped
+
+  worker:
+    <<: *backend
+    command: ["python", "-m", "app.worker"]
+    depends_on:
+      db:
+        condition: service_healthy
+      initialize:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+  web:
+    image: nexurgy-web:local
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE: .
+    ports:
+      - "127.0.0.1:${NEXURGY_WEB_PORT:-8080}:8080"
+    depends_on:
+      api:
+        condition: service_healthy
+        restart: true
+      worker:
+        condition: service_started
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  blobs:

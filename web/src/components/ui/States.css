@@ -1,0 +1,62 @@
+/* EmptyState kind marks (States.tsx). The layout itself is still the legacy
+   `.empty-state` block in app.css, which feature CSS overrides; it moves here
+   when those pages migrate. */
+
+/* The blueprint mark sits over a soft brand halo so an empty page reads as a
+   calm "ready" state, not a void. Pure decoration (radial glow behind the SVG);
+   it fades/scales in once and holds still under reduced motion. */
+.bp-mark-wrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+}
+.bp-mark-wrap::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  width: 180%;
+  aspect-ratio: 1;
+  background: var(--halo-brand);
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.8);
+  animation: bp-halo-in var(--dur-slow) var(--ease-out) forwards;
+}
+@keyframes bp-halo-in {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+:root[data-motion='reduced'] .bp-mark-wrap::before {
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+.pr-empty-mark {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-raised);
+  color: var(--color-text-tertiary);
+}
+.pr-empty-mark svg {
+  width: 22px;
+  height: 22px;
+}
+.empty-state[data-kind='no-permission'] .pr-empty-mark {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+.empty-state.compact .pr-empty-mark {
+  width: 36px;
+  height: 36px;
+}
+.empty-state.compact .pr-empty-mark svg {
+  width: 18px;
+  height: 18px;
+}

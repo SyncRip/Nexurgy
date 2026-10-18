@@ -1,0 +1,64 @@
+/* StatusChip skin (StatusChip.tsx). Each status sets the foreground and soft
+   background pair from the L1 status tokens. */
+
+.pr-status {
+  --pr-status-fg: var(--pending);
+  --pr-status-bg: var(--pending-soft);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  max-width: 100%;
+  padding: var(--sp-0_5) var(--sp-2);
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  background: var(--pr-status-bg);
+  color: var(--pr-status-fg);
+  font-size: var(--text-xs);
+  line-height: var(--leading-xs);
+  font-weight: var(--weight-medium);
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.pr-status__icon {
+  width: 13px;
+  height: 13px;
+  flex: none;
+}
+.pr-status__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pr-status--ok {
+  --pr-status-fg: var(--ok);
+  --pr-status-bg: var(--ok-soft);
+}
+.pr-status--warn {
+  --pr-status-fg: var(--warn);
+  --pr-status-bg: var(--warn-soft);
+}
+.pr-status--err {
+  --pr-status-fg: var(--err);
+  --pr-status-bg: var(--err-soft);
+}
+.pr-status--running,
+.pr-status--info {
+  --pr-status-fg: var(--measure);
+  --pr-status-bg: var(--measure-soft);
+}
+.pr-status--stale {
+  --pr-status-fg: var(--stale);
+  --pr-status-bg: var(--stale-soft);
+}
+
+.pr-status--running .pr-status__icon {
+  animation: pr-status-spin 1.2s linear infinite;
+}
+@keyframes pr-status-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+:root[data-motion='reduced'] .pr-status--running .pr-status__icon {
+  animation: none;
+}

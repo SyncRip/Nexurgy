@@ -1,0 +1,204 @@
+/* Part canvas (R1.2 prototype "Part canvas"): bar, canvas + side panel. */
+.pflow {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 8px;
+  min-height: 0;
+  height: 100%;
+}
+.pflow-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  min-width: 0;
+}
+.pflow-pick {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.pflow-pick svg {
+  width: 15px;
+  height: 15px;
+  color: var(--text-3);
+}
+.pflow-pick .select {
+  max-width: 280px;
+}
+.pflow-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 400px);
+  gap: 10px;
+  min-height: 0;
+}
+.pflow-canvas.wf-run-canvas {
+  position: relative;
+  height: auto;
+  min-height: 420px;
+}
+.pflow-legend {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: var(--z-canvas-overlay);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  pointer-events: none;
+}
+.pflow-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: var(--fs-11);
+  color: var(--text-2);
+}
+.pflow-legend-item i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--text-3);
+}
+.pflow-legend-item.st-succeeded i {
+  background: var(--ok);
+}
+.pflow-legend-item.st-running i,
+.pflow-legend-item.st-ready i {
+  background: var(--measure);
+}
+.pflow-legend-item.st-waiting_human i {
+  background: var(--warn);
+}
+.pflow-legend-item.st-failed i {
+  background: var(--err);
+}
+.pflow-side {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-height: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  background: var(--surface);
+  overflow: hidden;
+}
+.pflow-side-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--line);
+}
+.pflow-side-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  max-width: 60%;
+  padding: 10px 14px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--text-2);
+  font: inherit;
+  font-size: var(--fs-13);
+  cursor: pointer;
+}
+.pflow-side-tab svg {
+  width: 14px;
+  height: 14px;
+  flex: none;
+}
+.pflow-side-tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  font-weight: 600;
+}
+.pflow-side-body {
+  min-height: 0;
+  overflow: auto;
+  display: grid;
+  align-content: start;
+}
+.pflow-side-body.is-ai {
+  /* The embedded assistant expects its host to pad it (as in the model tab). */
+  padding: 10px 14px 12px;
+  display: block;
+}
+.pflow-side-body .wf-drawer {
+  max-height: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.pflow-side-empty {
+  margin: 0;
+  padding: 12px 14px 4px;
+}
+.pflow-editor {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 4px;
+  min-height: 0;
+}
+.pflow-editor .wf-editor {
+  height: 100%;
+  min-height: 480px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  overflow: hidden;
+}
+.pflow-note {
+  margin: 0;
+}
+.pflow-sources {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 8px;
+  margin: 10px 0 14px;
+}
+@media (max-width: 1100px) {
+  .pflow-body {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(420px, 60vh) auto;
+  }
+  .pflow-side {
+    min-height: 420px;
+  }
+}
+
+/* Canvas controls share the part bar and wrap within their slot when space is limited. */
+.part-bar.flow { flex-wrap: nowrap; }
+.part-bar.flow .part-bar-id { flex: 0 1 auto; }
+.part-bar-slot { flex: 1 1 auto; min-width: 0; }
+.pflow-task {
+  display: inline-flex; align-items: center; gap: 5px; min-width: 0; max-width: 260px;
+  padding: 3px 9px; border-radius: 999px; background: var(--accent-soft); color: var(--accent);
+  font-size: var(--fs-12); font-weight: 600; text-decoration: none;
+}
+.pflow-task svg { width: 13px; height: 13px; flex: none; }
+.pflow-sel {
+  display: inline-flex; align-items: center; gap: 6px; min-width: 0; height: 30px; padding: 0 8px;
+  border: 1px solid var(--line-2); border-radius: var(--r-1); background: var(--surface-2); font-size: var(--fs-12);
+}
+.pflow-sel svg { width: 14px; height: 14px; flex: none; color: var(--text-3); }
+.pflow-sel select { min-width: 0; max-width: 220px; border: 0; background: transparent; color: var(--text); font: inherit; cursor: pointer; }
+.pflow-sel .mono { color: var(--text-3); font-size: 11.5px; white-space: nowrap; }
+/* floating canvas toolbar (prototype .cv-tools) */
+.cv-tools.react-flow__panel { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 12px; }
+.cv-grp { display: flex; overflow: hidden; border: 1px solid var(--line-2); border-radius: 7px; background: var(--surface); box-shadow: var(--shadow); }
+.cv-grp button { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border: 0; border-right: 1px solid var(--line); background: none; color: var(--text-2); font-size: var(--fs-12); cursor: pointer; }
+.cv-grp button:last-child { border-right: 0; }
+.cv-grp button:hover:not(:disabled) { background: var(--surface-2); color: var(--text); }
+.cv-grp button.hl { color: var(--accent); font-weight: 600; }
+.cv-grp button:disabled { opacity: 0.45; cursor: default; }
+.cv-grp svg { width: 14px; height: 14px; }
+@media (max-width: 1100px) {
+  .part-bar.flow { flex-wrap: wrap; }
+}
+.pflow.ported { grid-template-rows: minmax(0, 1fr); }
+.pflow-sel select { flex: none; min-width: 64px; }
+.pflow-sel { flex: none; }
+.pflow-sel select { max-width: 170px; }

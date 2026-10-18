@@ -1,0 +1,31 @@
+# Only application sources and container configuration enter the build context.
+*
+!package.json
+!package-lock.json
+!index.html
+!tsconfig.json
+!vite.config.ts
+!src/
+!src/**
+!Dockerfile
+!nginx.conf
+!.dockerignore
+
+# Never include environment files, credentials, or generated artifacts.
+.env
+.env.*
+**/.env
+**/.env.*
+**/*.pem
+**/*.key
+**/*credentials*.json
+**/*service-account*.json
+**/node_modules/
+**/.cache/
+**/coverage/
+**/dist/
+**/*.tsbuildinfo
+**/*.log
+deploy/
+docs/
+.git/

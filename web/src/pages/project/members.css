@@ -1,0 +1,133 @@
+/* Project → Members (prototype #project.members). */
+.mem-table-wrap {
+  border-radius: 9px;
+}
+.mem-table th,
+.mem-table td {
+  font-size: 12.5px;
+}
+.mem-table thead th {
+  font: 500 10.5px/1.2 var(--font-mono);
+  letter-spacing: 0.1em;
+}
+.mem {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  min-width: 0;
+}
+.mem > div {
+  display: grid;
+  min-width: 0;
+}
+.mem b {
+  font-weight: 500;
+}
+.mem small {
+  font-size: 11px;
+  color: var(--text-3);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mem-av {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--surface-3);
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+  flex: none;
+}
+.mem-sub {
+  display: block;
+  margin-top: 3px;
+}
+.mem-pchip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  padding: 4px 9px;
+  border: 1px solid var(--line-2);
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  justify-self: start;
+}
+.mem-pchip.on {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.mem-pchip.dis {
+  opacity: 0.55;
+  cursor: default;
+}
+.mem-pchip input {
+  margin: 0;
+}
+.mem-card .panel-h {
+  gap: var(--sp-2);
+}
+.mem-perm-wrap {
+  overflow-x: auto;
+  padding: 4px 14px 0;
+}
+.mem-perm {
+  width: 100%;
+  min-width: 520px;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+.mem-perm th,
+.mem-perm td {
+  text-align: center;
+  padding: 7px 8px;
+  border-bottom: 1px solid var(--line);
+}
+.mem-perm th {
+  font: 500 10.5px/1.2 var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+.mem-perm td:first-child,
+.mem-perm th:first-child {
+  text-align: left;
+}
+.mem-perm tbody tr:last-child td {
+  border-bottom: 0;
+}
+.mem-perm .yes {
+  color: var(--ok);
+  font-weight: 600;
+}
+.mem-perm .no {
+  color: var(--text-3);
+}
+.mem-perm .maybe {
+  font-size: 11px;
+  color: var(--accent);
+}
+.mem-note {
+  margin: 0;
+  padding: 10px 14px 12px;
+}
+.mem-duties {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+.mem-duties li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 8px;
+  align-items: center;
+  padding: 6px 9px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 12.5px;
+}

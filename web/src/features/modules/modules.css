@@ -1,0 +1,118 @@
+/* Process modules: content view and the "save as process module" form.
+   Tokens only; every class is prefixed mod-. */
+
+.mod-steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 6px;
+  counter-reset: mod-step;
+}
+.mod-steps > li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 2px 10px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  min-width: 0;
+}
+.mod-steps > li::before {
+  counter-increment: mod-step;
+  content: counter(mod-step);
+  grid-row: span 3;
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid var(--line-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-11);
+}
+.mod-steps .mod-step-desc {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: var(--text-2);
+}
+.mod-text {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.mod-params {
+  width: 100%;
+}
+
+/* form */
+.mod-section {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  min-width: 0;
+}
+.mod-section > legend {
+  padding: 0 4px;
+  font-size: var(--fs-11);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.mod-xyz {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+.mod-row-draft {
+  display: grid;
+  gap: 6px;
+  padding: 8px;
+  border: 1px dashed var(--line-2);
+  border-radius: var(--r-2);
+  min-width: 0;
+}
+.mod-row-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.mod-step-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: 6px;
+}
+.mod-param-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 0.8fr) repeat(3, minmax(0, 0.8fr));
+  gap: 6px;
+}
+.mod-quickfill {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+@media (max-width: 767px) {
+  .mod-step-grid,
+  .mod-param-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .mod-step-grid > :first-child,
+  .mod-param-grid > :first-child {
+    grid-column: 1 / -1;
+  }
+}
+.mod-h {
+  margin: 0;
+  font-size: var(--fs-11);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}

@@ -1,0 +1,25 @@
+/* The project list is independent of the current project scope; cards and tables share the search tools. */
+.projects-page { max-width: 1520px; }
+.projects-page .toolbar { padding: 14px 16px; border: 1px solid var(--line); border-radius: var(--r-3); background: var(--surface); }
+.project-sort { display: flex; align-items: center; gap: 8px; font-size: var(--fs-12); color: var(--text-3); }
+.project-results { display: flex; align-items: center; gap: 16px; color: var(--text-3); font-size: var(--fs-12); font-variant-numeric: tabular-nums; }
+.projects-page .card-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 16px; }
+.projects-page .pcard { min-width: 0; min-height: 200px; }
+.projects-page .pcard::before, .projects-page .pcard::after { display: none; }
+.projects-page .pcard.is-current { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
+.project-current { display: inline-flex; align-items: center; padding: 2px 7px; border-radius: var(--r-1); font-size: var(--fs-11); color: var(--accent); background: var(--accent-soft); white-space: nowrap; }
+.projects-page .pcard-name { font-size: var(--fs-20); overflow-wrap: anywhere; }
+.projects-page .pcard-desc { margin: 0 0 8px; overflow-wrap: anywhere; }
+.projects-page .pcard-foot { flex-wrap: wrap; border-top-style: solid; }
+.projects-page td .project-current { margin-left: 6px; }
+@media (max-width: 640px) {
+  .projects-page .toolbar { padding: 12px; gap: 12px; }
+  .projects-page .toolbar .search { flex: 1 1 100%; min-width: 0; }
+  .projects-page .toolbar > .grow { display: none; }
+  .projects-page .toolbar > .check { flex: 1 1 100%; }
+  .projects-page .project-sort { flex: 1; }
+  .projects-page .project-sort > span { display: none; }
+  .projects-page .project-sort .select { width: 100%; }
+  .projects-page .toolbar .select, .projects-page .toolbar .input, .projects-page .toolbar .seg-btn { min-height: 44px; }
+  .projects-page .pcard { padding: 16px; }
+}

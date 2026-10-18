@@ -1,0 +1,142 @@
+/* Drawer skin (Drawer.tsx). Base UI positions nothing: the viewport is a fixed
+   flex container and the popup follows the swipe through
+   --drawer-swipe-movement-x / -y. Enter / exit use [data-starting-style] /
+   [data-ending-style]; while swiping, transitions are off. */
+
+.pr-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-drawer);
+  background: var(--scrim);
+  opacity: calc(1 - var(--drawer-swipe-progress, 0));
+  transition: opacity var(--dur-panel) var(--ease-out);
+}
+.pr-drawer-backdrop[data-starting-style],
+.pr-drawer-backdrop[data-ending-style] {
+  opacity: 0;
+}
+.pr-drawer-backdrop[data-swiping] {
+  transition-duration: 0ms;
+}
+
+.pr-drawer-viewport {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-drawer);
+  display: flex;
+}
+.pr-drawer-viewport[data-placement='side'] {
+  justify-content: flex-end;
+  align-items: stretch;
+}
+.pr-drawer-viewport[data-placement='sheet'] {
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.pr-drawer {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  box-shadow: var(--elev-3);
+  outline: none;
+  transition: transform var(--dur-panel) var(--ease-out);
+}
+.pr-drawer[data-swiping] {
+  transition-duration: 0ms;
+  user-select: none;
+}
+.pr-drawer[data-ending-style] {
+  transition-timing-function: var(--ease-in);
+  transition-duration: calc(var(--drawer-swipe-strength, 1) * var(--dur-panel));
+}
+
+/* Right-hand panel (≥ md) */
+.pr-drawer[data-placement='side'] {
+  width: min(480px, 100vw);
+  height: 100%;
+  border-left: 1px solid var(--color-border-default);
+  transform: translateX(var(--drawer-swipe-movement-x, 0px));
+}
+.pr-drawer--lg[data-placement='side'] {
+  width: min(740px, 100vw);
+}
+.pr-drawer[data-placement='side'][data-starting-style],
+.pr-drawer[data-placement='side'][data-ending-style] {
+  transform: translateX(100%);
+}
+
+/* Bottom sheet (< md) */
+.pr-drawer[data-placement='sheet'] {
+  width: 100%;
+  max-height: 88dvh;
+  border-top: 1px solid var(--color-border-default);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  transform: translateY(var(--drawer-swipe-movement-y, 0px));
+}
+.pr-drawer[data-placement='sheet'][data-starting-style],
+.pr-drawer[data-placement='sheet'][data-ending-style] {
+  transform: translateY(100%);
+}
+.pr-drawer__handle {
+  flex: none;
+  width: 36px;
+  height: 4px;
+  margin: var(--sp-2) auto 0;
+  border-radius: var(--radius-full);
+  background: var(--color-border-default);
+}
+
+.pr-drawer__head {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-2);
+  flex: none;
+  padding: var(--sp-4) var(--sp-4) var(--sp-3) var(--sp-5);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+.pr-drawer__titles {
+  flex: 1;
+  min-width: 0;
+}
+.pr-drawer__title {
+  margin: 0;
+  font-size: var(--text-lg);
+  line-height: var(--leading-lg);
+  font-weight: var(--weight-strong);
+  overflow-wrap: anywhere;
+}
+.pr-drawer__sub {
+  margin: var(--sp-0_5) 0 0;
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+  line-height: var(--leading-sm);
+}
+.pr-drawer__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+}
+.pr-drawer__body {
+  flex: 1;
+  min-height: 0;
+  padding: var(--sp-4) var(--sp-5);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.pr-drawer__foot {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--sp-2);
+  flex: none;
+  padding: var(--sp-3) var(--sp-5);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+:root[data-motion='reduced'] .pr-drawer,
+:root[data-motion='reduced'] .pr-drawer-backdrop {
+  transition: none;
+}

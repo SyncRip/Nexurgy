@@ -1,0 +1,527 @@
+/* Agent profiles (UI06, R1.2 prototype #flows.agents / #agent.<id>). Tokens only; every class is prefixed ag-. */
+
+.ag-section {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+.ag-section > h3 {
+  font-size: var(--fs-13);
+  font-weight: 600;
+}
+.ag-section-hint {
+  color: var(--text-3);
+  font-size: var(--fs-12);
+}
+.ag-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 190px), 1fr));
+  gap: 8px;
+}
+.ag-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 2px 10px;
+  align-items: start;
+  padding: 10px 12px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-2);
+  background: var(--surface);
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  min-width: 0;
+}
+.ag-card:hover:not(:disabled) {
+  border-color: var(--text-3);
+}
+.ag-card[aria-checked='true'],
+.ag-card[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.ag-card:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.ag-card-mark {
+  grid-row: 1 / span 2;
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  border-radius: 4px;
+  border: 1px solid var(--line-2);
+  background: var(--bg-2);
+  color: var(--accent-ink);
+}
+.ag-card-mark.round {
+  border-radius: 50%;
+}
+.ag-card[aria-checked='true'] .ag-card-mark,
+.ag-card[aria-pressed='true'] .ag-card-mark {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.ag-card-mark svg {
+  width: 12px;
+  height: 12px;
+}
+.ag-card-title {
+  font-weight: 600;
+  font-size: var(--fs-13);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.ag-card-title svg {
+  width: 14px;
+  height: 14px;
+  color: var(--text-3);
+  flex: none;
+}
+.ag-card-desc {
+  color: var(--text-3);
+  font-size: var(--fs-12);
+}
+.ag-card.compact {
+  grid-template-columns: auto minmax(0, 1fr);
+  padding: 8px 10px;
+}
+.ag-card.compact .ag-card-mark {
+  grid-row: auto;
+}
+.ag-card-title,
+.ag-card-desc {
+  grid-column: 2;
+}
+.ag-card-title code {
+  overflow-wrap: anywhere;
+}
+
+/* tool contract (execution layer P2, prototype #agent.<id> → Tools): one row per registry tool */
+.ag-tools {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  background: var(--surface);
+}
+.ag-tool {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr) auto;
+  gap: 4px 10px;
+  align-items: start;
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--line);
+}
+.ag-tool:last-child {
+  border-bottom: 0;
+}
+.ag-tool-pick {
+  display: grid;
+  place-items: center;
+  height: 20px;
+}
+.ag-tool-pick svg {
+  width: 14px;
+  height: 14px;
+  color: var(--text-3);
+}
+.ag-tool-main {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+.ag-tool-name {
+  font-size: var(--fs-13);
+  overflow-wrap: anywhere;
+}
+.ag-tool-name b {
+  font-weight: 500;
+}
+.ag-tool-name code {
+  color: var(--text-3);
+  font-size: var(--fs-12);
+}
+.ag-tool-params summary {
+  cursor: pointer;
+  color: var(--text-2);
+  font-size: var(--fs-12);
+  width: fit-content;
+}
+.ag-tool-params[open] {
+  display: grid;
+  gap: 6px;
+  padding-top: 2px;
+}
+.ag-tool-params p {
+  overflow-wrap: anywhere;
+}
+table.ag-param-table {
+  table-layout: fixed;
+  font-size: var(--fs-12);
+}
+table.ag-param-table th:nth-child(1) {
+  width: 30%;
+}
+table.ag-param-table th:nth-child(2) {
+  width: 22%;
+}
+table.ag-param-table th:nth-child(3) {
+  width: 14%;
+}
+table.ag-param-table td {
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+.ag-limits {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+.ag-unit-input {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-1);
+  background: var(--bg-2);
+  min-width: 0;
+}
+.ag-unit-input .input {
+  border: 0;
+  background: transparent;
+  min-width: 0;
+}
+.ag-unit-input .input:focus {
+  box-shadow: none;
+}
+.ag-unit-input:focus-within {
+  border-color: var(--measure);
+  box-shadow: 0 0 0 3px var(--measure-soft);
+}
+.has-error .ag-unit-input {
+  border-color: var(--err);
+}
+.ag-unit {
+  padding: 0 8px;
+  color: var(--text-3);
+  font-size: var(--fs-12);
+  white-space: nowrap;
+  border-left: 1px solid var(--line);
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+}
+.ag-foot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+.ag-model-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+
+/* ─── wall (prototype .agents / .agent) ─────────────────── */
+.ag-wall-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.ag-wall-bar p {
+  margin: 0;
+  flex: 1 1 320px;
+}
+.ag-code {
+  color: var(--accent);
+}
+.ag-wall {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  gap: 12px;
+  align-items: start;
+}
+.ag-wall-card {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  gap: 4px 12px;
+  align-content: start;
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-3);
+  background: var(--surface);
+  color: var(--text);
+  text-decoration: none;
+}
+.ag-wall-card:hover {
+  border-color: var(--line-2);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.ag-wall-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+.ag-wall-card.is-disabled .ag-wall-name {
+  color: var(--text-2);
+}
+.ag-wall-ico {
+  grid-row: span 3;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  background: var(--surface-3);
+  color: var(--text-2);
+}
+.ag-wall-ico svg {
+  width: 18px;
+  height: 18px;
+}
+.ag-wall-ico.big {
+  grid-row: auto;
+  width: 40px;
+  height: 40px;
+  flex: none;
+}
+.ag-wall-ico.tone-measure { background: var(--measure-soft); color: var(--measure); }
+.ag-wall-ico.tone-warn { background: var(--warn-soft); color: var(--warn); }
+.ag-wall-ico.tone-stale { background: var(--stale-soft); color: var(--stale); }
+.ag-wall-ico.tone-pending { background: var(--surface-3); color: var(--text-2); }
+.ag-wall-name {
+  font-size: 13.5px;
+  overflow-wrap: anywhere;
+}
+.ag-wall-desc {
+  margin: 0;
+  color: var(--text-3);
+  font-size: var(--fs-12);
+  line-height: 1.5;
+}
+.ag-wall-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+  min-width: 0;
+}
+.ag-wall-chips .chip {
+  max-width: 100%;
+  height: auto;
+  min-height: 22px;
+  padding: 3px 7px;
+  border-radius: var(--r-1);
+  line-height: 1.25;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.ag-wall-foot {
+  grid-column: 2;
+  color: var(--text-3);
+  font-size: var(--fs-12);
+}
+
+/* ─── detail page (prototype .agpage / .aggrid) ─────────── */
+.ag-page {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+}
+.ag-page-h {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 14px;
+  flex-wrap: wrap;
+}
+.ag-page-titles {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  flex: 1 1 320px;
+}
+.ag-page-name {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+.ag-page-name h2 {
+  margin: 0;
+  font-size: var(--fs-20);
+  overflow-wrap: anywhere;
+}
+.ag-page-name p {
+  margin: 0;
+}
+.ag-dirty {
+  color: var(--accent);
+}
+.ag-page-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.ag-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+.ag-form,
+.ag-side {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+  min-width: 0;
+}
+fieldset.ag-form {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.ag-side {
+  position: sticky;
+  top: 12px;
+}
+.ag-sec {
+  display: grid;
+  gap: 12px;
+  padding: 14px 16px;
+}
+.ag-sec.is-pending {
+  border-style: dashed;
+}
+.ag-sec-h {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.ag-sec-h h3 {
+  margin: 0;
+  font-size: var(--fs-14);
+  font-weight: 600;
+}
+.ag-sec-aside {
+  margin-left: auto;
+  min-width: 0;
+}
+.ag-section > h4 {
+  margin: 0;
+  font-size: var(--fs-13);
+  font-weight: 600;
+}
+.ag-prompt {
+  min-height: 150px;
+  font-size: var(--fs-12);
+  line-height: 1.6;
+}
+.ag-fixed {
+  display: grid;
+  gap: 6px;
+  padding: 10px 12px;
+  border-radius: var(--r-2);
+  background: var(--surface-2);
+}
+.ag-fixed-h {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-12);
+  font-weight: 600;
+  color: var(--text-2);
+}
+.ag-fixed-h svg {
+  width: 13px;
+  height: 13px;
+}
+.ag-fixed ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--text-2);
+  font-size: var(--fs-12);
+  line-height: 1.6;
+}
+.ag-uses {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ag-uses li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--line);
+  min-width: 0;
+}
+.ag-uses li:last-child {
+  border-bottom: 0;
+}
+.ag-uses a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: none;
+}
+.ag-ext {
+  width: 12px;
+  height: 12px;
+}
+
+@media (max-width: 900px) {
+  .ag-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ag-side {
+    position: static;
+  }
+  .ag-cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* key / value rows of the side cards (prototype .list) */
+.ag-kv {
+  display: grid;
+  margin: 0;
+}
+.ag-kv > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: var(--fs-12);
+}
+.ag-kv > div:last-child {
+  border-bottom: 0;
+}
+.ag-kv dt {
+  color: var(--text-3);
+}
+.ag-kv dd {
+  margin: 0;
+  text-align: right;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}

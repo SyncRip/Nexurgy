@@ -1,0 +1,275 @@
+/* Part cards and the parts list (R1.2 prototype #parts, pcard()); also used by the workbench. */
+
+.pc-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+.pc-grid.wide {
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+}
+.pc-grid > li {
+  display: grid;
+  min-width: 0;
+}
+.pc {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: inherit;
+  text-decoration: none;
+  text-align: left;
+  transition: border-color var(--dur-mid), box-shadow var(--dur-mid), transform var(--dur-mid) var(--ease);
+}
+.pc:hover {
+  border-color: var(--line-2);
+  box-shadow: var(--shadow-card);
+  transform: translateY(-2px);
+}
+.pc:focus-visible {
+  outline: none;
+  box-shadow: var(--focus);
+}
+.pc-th {
+  position: relative;
+  height: 128px;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(80% 90% at 50% 40%, var(--surface-3), var(--surface-2));
+  color: var(--text-2);
+  isolation: isolate;
+}
+.pc-rev {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: var(--z-raised);
+  font: 500 12px/1 var(--font-mono);
+  color: var(--text-3);
+}
+.pc-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; min-width: 0; }
+.pc-heading .chip {
+  height: 20px;
+  padding: 0 7px;
+  font-size: var(--fs-11);
+  max-width: 100%;
+}
+.pc-pic {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 18px 10px 4px;
+  min-width: 0;
+}
+.pc-pic > svg,
+.pc-pic > img {
+  display: block;
+  width: 100%;
+  max-width: 150px;
+  height: 100px;
+}
+.pc-ph {
+  max-width: 112px !important;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+  stroke-dasharray: 3 3;
+  opacity: 0.35;
+}
+.pc-model {
+  object-fit: contain;
+}
+/* The iso view's outlines, redrawn as hairlines in the theme's ink. */
+.pc-drawing {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  overflow: visible;
+}
+.pc-meta {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  min-width: 0;
+  padding: 14px 14px 16px;
+}
+.pc-pn {
+  font: 600 12.5px/1.2 var(--font-mono);
+  overflow-wrap: anywhere;
+}
+.pc-nm {
+  font-size: var(--fs-14);
+  font-weight: 600;
+  color: var(--text);
+  overflow-wrap: anywhere;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.pc-material { font: 12px/1.4 var(--font-mono); color: var(--text-3); overflow-wrap: anywhere; }
+.pc-prog {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  font: 12px/1.4 var(--font-mono);
+  color: var(--text-3);
+}
+
+/* flow progress: one square per node */
+.pc-bar {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 10px;
+  min-width: 0;
+  overflow: hidden;
+}
+.pc-bar.empty {
+  height: 6px;
+  margin-bottom: 4px;
+  border-bottom: 1px dashed var(--line-2);
+}
+.pc-bar .seg {
+  flex: 0 1 10px;
+  min-width: 3px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--line-2);
+}
+.pc-bar .seg-ok {
+  background: var(--ok);
+}
+.pc-bar .seg-skip {
+  background: var(--ok-soft);
+  box-shadow: inset 0 0 0 1px var(--ok);
+}
+.pc-bar .seg-run {
+  background: var(--measure);
+  animation: pc-pulse 1.2s ease-in-out infinite;
+}
+.pc-bar .seg-wait {
+  background: var(--warn);
+}
+.pc-bar .seg-err {
+  background: var(--err);
+}
+.pc-bar .seg-stop {
+  background: var(--pending);
+}
+.pc-spin {
+  animation: pc-rot 1.4s linear infinite;
+}
+@keyframes pc-pulse {
+  50% {
+    opacity: 0.45;
+  }
+}
+@keyframes pc-rot {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pc:hover { transform: none; }
+  .pc-bar .seg-run,
+  .pc-spin {
+    animation: none;
+  }
+}
+:root[data-motion='reduced'] .pc-bar .seg-run,
+:root[data-motion='reduced'] .pc-spin {
+  animation: none;
+}
+
+/* Area bar (40px): parts vs assemblies, its own standard row. The segmented
+   control is shorter than 40px, so the row keeps the standard height and
+   centres it, so the toolbar below lands at the shared offset. */
+.pp-kind {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  align-self: start;
+  justify-self: start;
+}
+
+/* toolbar: search, workflow-state filter, result count, cards / table */
+.pp-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  min-height: 40px;
+}
+.pp-filter-select {
+  flex: 0 0 auto;
+}
+.pp-results {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--text-3);
+  font-size: var(--fs-12);
+  font-variant-numeric: tabular-nums;
+}
+.pp-note {
+  margin: 0;
+  font-size: var(--fs-12);
+  color: var(--text-3);
+}
+
+/* table: the workflow column */
+.pt-flow {
+  display: grid;
+  gap: 4px;
+  min-width: 150px;
+  max-width: 240px;
+}
+.pt-flow-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.pt-flow-row .pc-bar {
+  flex: 1;
+}
+.pt-flow-row .mono {
+  font-size: var(--fs-11);
+  color: var(--text-3);
+}
+
+@media (max-width: 640px) {
+  .pp-toolbar .search {
+    flex: 1 1 120px;
+    min-width: 0;
+  }
+  .pp-toolbar > .grow, .pp-view-label { display: none; }
+  .pc-grid,
+  .pc-grid.wide {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+  .pc { grid-template-columns: 100px minmax(0, 1fr); grid-template-rows: auto; }
+  .pc-th { height: 100%; min-height: 148px; }
+  .pc-pic { padding: 24px 4px 8px; }
+  .pc-meta { padding: 12px; gap: 6px; }
+  .pc-nm { display: block; }
+  .pc-prog { font-size: var(--fs-11); }
+  .pp-toolbar .input, .pp-toolbar .seg-btn, .pp-kind .seg-btn { min-height: 44px; }
+  .pp-results { width: 100%; justify-content: space-between; }
+}

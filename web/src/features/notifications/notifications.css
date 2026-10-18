@@ -1,0 +1,145 @@
+/* Notification bell and dropdown. Tokens only; every class is prefixed nt-. */
+
+.nt-wrap {
+  display: inline-flex;
+}
+.nt-bell {
+  position: relative;
+}
+.nt-badge {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  display: inline-grid;
+  place-items: center;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  pointer-events: none;
+}
+.nt-panel {
+  display: grid;
+  max-height: min(70vh, 560px);
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+}
+.nt-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+}
+.nt-head h2 {
+  margin: 0;
+  font-size: var(--fs-14);
+}
+.nt-scroll {
+  overflow-y: auto;
+  min-height: 0;
+}
+.nt-empty {
+  margin: 0;
+  padding: 18px 12px;
+  text-align: center;
+}
+.nt-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.nt-list > li + li {
+  border-top: 1px solid var(--line);
+}
+.nt-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  background: none;
+  color: var(--text);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+.nt-item:hover,
+.nt-item:focus-visible {
+  background: var(--surface-2);
+}
+.nt-list li.unread .nt-item {
+  background: color-mix(in srgb, var(--accent-soft) 60%, transparent);
+}
+.nt-list li.unread .nt-item:hover,
+.nt-list li.unread .nt-item:focus-visible {
+  background: var(--accent-soft);
+}
+.nt-ico svg {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  color: var(--text-3);
+}
+.nt-text {
+  display: grid;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+.nt-title {
+  font-size: var(--fs-13);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.nt-list li.read .nt-title {
+  font-weight: 500;
+  color: var(--text-2);
+}
+.nt-body {
+  font-size: var(--fs-12);
+  color: var(--text-2);
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.nt-meta {
+  font-size: var(--fs-11);
+  color: var(--text-3);
+}
+.nt-dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  margin-top: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.nt-foot {
+  margin: 0;
+  padding: 8px 12px;
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 767px) {
+  /* full-width sheet under the top bar instead of a dropdown that could overflow;
+     !important beats the positioner's inline placement styles */
+  .nt-wrap .pop-positioner {
+    position: fixed !important;
+    top: calc(var(--top-h) + 4px) !important;
+    left: 12px !important;
+    right: 12px;
+    transform: none !important;
+  }
+  .nt-wrap .popover {
+    width: auto;
+  }
+}

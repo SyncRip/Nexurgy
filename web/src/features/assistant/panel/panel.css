@@ -1,0 +1,580 @@
+/* AI work panel (.trellis/tasks/archive/2026-10/10-12-ai-work-panel): the right column of the workspace's full layout
+   (.as-fullpage.wp-on), shared with the context inspector; wide = the panel takes most of the width; a full-screen
+   overlay on phones. The panel is a size container (`wp`): panes switch to side-by-side when it is wide enough.
+   Tokens only (dark / light). Canvas highlights (.wf-hl-*) live at the end of workflow.css. */
+
+/* The grid of .as-fullpage.wp-on / .wp-wide lives in assistant.css (loaded with the page, not this lazy chunk). */
+
+.wp {
+  container: wp / inline-size;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  border-left: 1px solid var(--line);
+  background: var(--surface);
+  font-size: var(--fs-13);
+  outline: none;
+}
+
+/* ─── header ───────────────────────────────────────────────────────────── */
+.wp-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+  padding: 10px 10px 8px 12px;
+  border-bottom: 1px solid var(--line);
+}
+.wp-back {
+  display: none;
+}
+.wp-ico {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  flex: none;
+  border-radius: var(--r-2);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.wp-ico svg {
+  width: 16px;
+  height: 16px;
+}
+.wp-titles {
+  display: grid;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+.wp-kind {
+  font-size: var(--fs-11);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.wp-title {
+  font-size: var(--fs-14);
+  font-weight: 600;
+  outline: none;
+}
+.wp-title:focus-visible {
+  box-shadow: var(--focus);
+  border-radius: var(--r-1);
+}
+.wp-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  font-size: var(--fs-12);
+}
+.wp .chip.sm {
+  height: 18px;
+  padding: 0 6px;
+  font-size: var(--fs-11);
+}
+.wp .chip svg {
+  width: 12px;
+  height: 12px;
+}
+.wp-acts {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: none;
+}
+.wp-lock.active {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* chat target line */
+.wp-target {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-2);
+  font-size: var(--fs-12);
+  color: var(--text-2);
+}
+.wp-target > svg {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  color: var(--text-3);
+}
+.wp-target.following > svg {
+  color: var(--accent);
+}
+.wp-target.not_following > svg {
+  color: var(--warn);
+}
+.wp-target-text {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.wp-target .btn {
+  flex: none;
+}
+
+/* ─── body ─────────────────────────────────────────────────────────────── */
+.wp-body {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  overflow-y: auto;
+}
+.wp-pad {
+  padding: 12px;
+}
+.wp-notes {
+  display: grid;
+  gap: 6px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--line);
+}
+.wp-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  margin: 0;
+  padding: 6px 12px;
+  border-top: 1px solid var(--line);
+}
+.wp-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--measure);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.wp-link svg {
+  width: 13px;
+  height: 13px;
+}
+.wp-link:hover,
+.wp-link.active {
+  text-decoration: underline;
+}
+
+/* workflow: the editor fills the body */
+.wp-body.wp-fill {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.wp-editor {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+}
+.wp-editor > .wf-editor {
+  flex: 1;
+}
+
+/* plan / run: canvas above the details, side by side once the panel is wide enough */
+.wp-body.wp-split {
+  display: flex;
+  flex-direction: column;
+}
+.wp-canvas.wf-run-canvas {
+  position: relative;
+  min-height: 260px;
+  border: 0;
+  border-radius: 0;
+}
+.wp-split > .wp-canvas {
+  flex: none;
+  height: 55%;
+}
+.wp-split > .wp-side {
+  display: grid;
+  align-content: start;
+  min-width: 0;
+  border-top: 1px solid var(--line);
+}
+@container wp (min-width: 960px) {
+  .wp-body.wp-split {
+    flex-direction: row;
+    overflow: hidden;
+  }
+  .wp-split > .wp-canvas {
+    flex: 1;
+    height: auto;
+    min-height: 0;
+  }
+  .wp-split > .wp-side {
+    width: clamp(300px, 38%, 420px);
+    flex: none;
+    overflow-y: auto;
+    border-top: 0;
+    border-left: 1px solid var(--line);
+  }
+}
+
+/* the run page's node drawer, in flow inside the panel (never a fixed overlay here) */
+.wp .wf-drawer {
+  position: static;
+  inset: auto;
+  z-index: auto;
+  max-height: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.wp-attn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+  padding: 7px 10px;
+  border: 1px solid var(--line-2);
+  border-left: 3px solid var(--warn);
+  border-radius: var(--r-2);
+  background: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.wp-attn.ns-failed {
+  border-left-color: var(--err);
+}
+.wp-attn:hover {
+  background: var(--surface-3);
+}
+
+/* plan details */
+.wp-legend {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: var(--z-canvas-overlay);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  max-width: calc(100% - 16px);
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  background: var(--surface);
+  font-size: var(--fs-11);
+  color: var(--text-2);
+}
+.wp-legend:empty {
+  display: none;
+}
+.wp-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.wp-legend-item i {
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--c, var(--line-2));
+  border-radius: 3px;
+}
+.wp-legend-item.hl-added { --c: var(--ok); }
+.wp-legend-item.hl-changed { --c: var(--warn); }
+.wp-legend-item.hl-focus { --c: var(--accent); }
+.wp-legend-item.hl-removed { --c: var(--err); }
+.wp-legend-item.hl-removed i {
+  border-style: dashed;
+}
+.wp-side > .wp-plan-head,
+.wp-side > .wp-plan-summary,
+.wp-side > .wp-plan-list,
+.wp-side > .wp-plan-warn,
+.wp-side > .wp-plan-note,
+.wp-side > .wp-plan-acts,
+.wp-side > .callout {
+  margin: 0 12px;
+}
+.wp-side {
+  gap: 10px;
+  padding-bottom: 12px;
+}
+.wp-plan-head {
+  padding-top: 12px;
+}
+.wp-plan-summary {
+  color: var(--text-2);
+}
+.wp-plan-list {
+  display: grid;
+  gap: 4px;
+  padding-left: 18px;
+  font-size: var(--fs-12);
+  overflow-wrap: anywhere;
+}
+.wp-plan-warn {
+  display: grid;
+  gap: 4px;
+  padding: 0;
+  list-style: none;
+  font-size: var(--fs-12);
+  color: var(--warn);
+}
+.wp-plan-warn li,
+.wp-plan-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+.wp-plan-warn svg,
+.wp-plan-note svg {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  margin-top: 2px;
+}
+.wp-plan-note {
+  font-size: var(--fs-12);
+  color: var(--text-2);
+}
+.wp-plan-acts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* ─── narrow editor (WorkflowEditor compact) ───────────────────────────── */
+.wf-editor.compact {
+  container-type: inline-size;
+  height: 100%;
+  min-height: 0;
+}
+.wf-editor.compact .wf-editor-bar {
+  gap: 6px;
+  padding: 6px 10px;
+}
+.wf-editor.compact .wf-title-edit {
+  flex: 1 1 180px;
+}
+.wf-editor.compact .wf-name-input {
+  font-size: var(--fs-14);
+}
+.wf-editor.compact .wf-editor-body {
+  position: relative;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(220px, 1fr) auto;
+}
+.wf-editor.compact .wf-palette {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: var(--z-canvas-overlay);
+  width: min(240px, 85%);
+  max-height: none;
+  border-right: 1px solid var(--line);
+  border-bottom: 0;
+  box-shadow: var(--shadow);
+}
+.wf-editor.compact .wf-palette-body ul {
+  grid-template-columns: minmax(0, 1fr);
+}
+.wf-editor.compact .wf-inspector {
+  max-height: 280px;
+  border-left: 0;
+  border-top: 1px solid var(--line);
+}
+@container (min-width: 960px) {
+  .wf-editor.compact .wf-editor-body {
+    grid-template-columns: minmax(0, 1fr) 280px;
+    grid-template-rows: minmax(0, 1fr);
+  }
+  .wf-editor.compact .wf-inspector {
+    max-height: none;
+    border-top: 0;
+    border-left: 1px solid var(--line);
+  }
+}
+
+/* ─── revision / task ──────────────────────────────────────────────────── */
+.wp .vw {
+  height: clamp(220px, 40vh, 480px);
+}
+.wp-facts {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  font-size: var(--fs-12);
+}
+.wp-facts > div {
+  display: grid;
+  grid-template-columns: minmax(80px, max-content) minmax(0, 1fr);
+  gap: 10px;
+}
+.wp-facts dt {
+  color: var(--text-3);
+}
+.wp-facts dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.wp-task {
+  display: grid;
+  gap: 4px;
+}
+.wp-sec {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+}
+.wp-sec:last-child {
+  border-bottom: 0;
+}
+.wp-sec h3 {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: var(--fs-12);
+  font-weight: 600;
+  color: var(--text-2);
+}
+.wp-sec p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.wp-rows,
+.wp-crit {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.wp-rows li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  min-width: 0;
+}
+.wp-slot {
+  font-size: var(--fs-11);
+}
+.wp-crit li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+}
+.wp-crit-main {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.wp-check {
+  display: inline-grid;
+  flex: none;
+  margin-top: 1px;
+}
+.wp-check svg {
+  width: 15px;
+  height: 15px;
+}
+.wp-check.ok { color: var(--ok); }
+.wp-check.err { color: var(--err); }
+.wp-check.pending { color: var(--text-3); }
+.wp-task-verdict {
+  font-weight: 500;
+  font-size: var(--fs-11);
+}
+.wp-task-verdict.ok { color: var(--ok); }
+.wp-task-verdict.err { color: var(--warn); }
+
+/* ─── phones: a full-screen overlay with a back button ─────────────────── */
+@media (max-width: 767px) {
+  .as-fullpage.wp-on > .wp {
+    position: fixed;
+    top: var(--top-h);
+    right: 0;
+    bottom: calc(var(--bottom-h) + env(safe-area-inset-bottom));
+    left: 0;
+    z-index: var(--z-drawer);
+    border-left: 0;
+  }
+  .wp-back {
+    display: inline-grid;
+  }
+  .wp-close,
+  .wp-wide-btn,
+  .wp-hide-narrow,
+  .wp-ico {
+    display: none;
+  }
+  .wp-head {
+    padding: 8px 8px 8px 6px;
+  }
+}
+
+/* A selected step that is only on the unsaved canvas (it becomes the chat target after a save). */
+.wp-note {
+  margin: 0;
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+/* ─── task draft (AI-native main agent, .trellis/tasks/archive/2026-10/10-15-ai-native-orchestrator) ─── */
+.wp-draft {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+.wp-draft-crit {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.wp-draft-legend {
+  margin-bottom: 4px;
+  padding: 0;
+  font-size: var(--fs-12);
+  font-weight: 600;
+  color: var(--text-2);
+}
+.wp-draft-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.wp-draft-row > .input {
+  flex: 1 1 160px;
+  min-width: 0;
+}
+.wp-draft-acts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}

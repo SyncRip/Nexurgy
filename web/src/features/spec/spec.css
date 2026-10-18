@@ -1,0 +1,241 @@
+/* Engineering spec (W2): /specs/:specId, the "Specs" resources tab and the new-spec dialog. */
+
+.spec-chip-sm {
+  font-size: var(--fs-11);
+  padding: 1px 6px;
+}
+.spec-chip-sm svg {
+  width: 12px;
+  height: 12px;
+}
+
+.spec-head-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.spec-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--sp-4);
+}
+
+.spec-sec .panel-h .count {
+  color: var(--text-3);
+  font-weight: 400;
+}
+
+.spec-sec .panel-b > .faint:only-child {
+  margin: 0;
+}
+
+.spec-src {
+  border-bottom: 1px solid var(--line);
+  padding: 10px 0;
+  display: grid;
+  gap: 6px;
+}
+.spec-src:first-child {
+  padding-top: 0;
+}
+.spec-src:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.spec-src-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.spec-src-ranges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  font-size: var(--fs-12);
+  color: var(--text-2);
+}
+.spec-src details summary {
+  cursor: pointer;
+  font-size: var(--fs-12);
+  color: var(--text-2);
+}
+.spec-chunks {
+  margin-top: 6px;
+}
+
+.spec-tree {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.spec-tree ul {
+  list-style: none;
+  margin: 0;
+  padding-left: 18px;
+  border-left: 1px dashed var(--line-2);
+}
+.spec-node {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  padding: 5px 0;
+}
+.spec-node .key {
+  font-family: var(--font-mono);
+  font-size: var(--fs-12);
+  color: var(--text-3);
+}
+.spec-node .qty {
+  font-family: var(--font-mono);
+  color: var(--accent);
+}
+.spec-node .inst {
+  font-size: var(--fs-12);
+  color: var(--text-3);
+}
+
+.spec-ev {
+  display: grid;
+  gap: 2px;
+  font-size: var(--fs-12);
+}
+.spec-ev-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  align-items: baseline;
+}
+.spec-ev-line .loc {
+  font-family: var(--font-mono);
+  color: var(--text-2);
+}
+.spec-facts td.ev {
+  min-width: 280px;
+}
+.spec-facts td.nowrap {
+  white-space: nowrap;
+}
+
+.spec-quote {
+  color: var(--text-2);
+  font-style: normal;
+}
+.spec-quote::before {
+  content: '“';
+}
+.spec-quote::after {
+  content: '”';
+}
+
+.spec-q {
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  padding: 10px 12px;
+  display: grid;
+  gap: 8px;
+}
+.spec-q.open {
+  border-color: var(--warn);
+  background: var(--warn-soft);
+}
+.spec-q-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  align-items: center;
+}
+.spec-q-cands {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+.spec-list {
+  display: grid;
+  gap: 10px;
+}
+
+.spec-chunk-text {
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: var(--font-mono);
+  font-size: var(--fs-12);
+  line-height: 1.6;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-1);
+  padding: 10px;
+  max-height: 55vh;
+  overflow: auto;
+}
+.spec-chunk-text mark {
+  background: var(--accent-soft);
+  color: var(--text);
+  outline: 1px solid var(--accent);
+}
+
+.spec-err dl {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 4px 12px;
+  margin: 6px 0 0;
+  font-size: var(--fs-12);
+}
+.spec-err dt {
+  color: var(--text-3);
+}
+.spec-err dd {
+  margin: 0;
+  word-break: break-word;
+}
+
+.spec-files {
+  max-height: 240px;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--r-1);
+  padding: 4px 8px;
+}
+.spec-file {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  font-size: var(--fs-13);
+}
+.spec-file .name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.spec-policy {
+  display: grid;
+  gap: 6px;
+}
+.spec-textarea {
+  min-height: 220px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-12);
+}
+
+@media (max-width: 640px) {
+  .spec-page .page-head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .spec-page .page-actions {
+    flex-wrap: wrap;
+  }
+  .spec-tree ul {
+    padding-left: 10px;
+  }
+  .spec-err dl {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -1,0 +1,17 @@
+export const featuresEn = {
+  'features.homePlaceholder': 'Describe your goal in one sentence. AI will plan the work and ask when a choice is needed…',
+  'features.homeHint': 'Start from a description, drawing or existing engineering result.',
+  'as.block.task_frozen': 'Task work is disabled. Unbind the task in Advanced to send a new request.',
+  'as.block.feature_disabled': 'This operation is disabled. Choose another operation.',
+  'features.collaboration': 'Collaboration',
+  'features.tasks': 'Tasks',
+  'features.stages': 'Project stages',
+  'features.process_modules': 'Process modules',
+  'features.template_library': 'Public template library',
+  'features.turbo_choice': 'Execution policy choice',
+  'features.model_choice': 'Model choice',
+  'features.disabled': '{feature} is disabled',
+  'features.disabledBody': 'Existing records remain available through their detail links. New work is unavailable for this feature.',
+  'features.historyOnly': 'Historical record. New changes are disabled; eligible running work can still be completed.',
+  'error.feature_disabled': 'This feature is disabled. Existing records remain available.',
+} as const;

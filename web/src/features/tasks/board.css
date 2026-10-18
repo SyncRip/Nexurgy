@@ -1,0 +1,329 @@
+/* Project page (R1.2 §09, prototype #project.*): header line, strip, task board. */
+.pa-title {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+}
+.pa-sub {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 72ch;
+}
+.pa-strip {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.4fr) auto;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.pa-strip.is-loading {
+  min-height: 112px;
+}
+.pa-strip > div {
+  padding: 14px 16px;
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  min-width: 0;
+}
+.pa-strip > div + div {
+  border-left: 1px solid var(--line);
+}
+.pa-lab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font: 500 10px/1 var(--font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.pa-lab .chip {
+  letter-spacing: 0;
+  text-transform: none;
+}
+.pa-goal p {
+  margin: 0;
+  font-size: var(--fs-13);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+.pa-goal .btn {
+  justify-self: start;
+}
+.pa-steps {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.pa-steps li {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  font-size: var(--fs-12);
+  color: var(--text-3);
+}
+.pa-steps i {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--surface-3);
+  display: block;
+}
+.pa-steps li.done i {
+  background: var(--ok);
+}
+.pa-steps li.current i {
+  background: var(--accent);
+}
+.pa-steps li.current {
+  color: var(--accent);
+  font-weight: 600;
+}
+.pa-steps li.done {
+  color: var(--text-2);
+}
+.pa-block {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: var(--fs-12);
+  min-width: 0;
+}
+.pa-block-text {
+  flex: 1 1 160px;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pa-lnk {
+  color: var(--text-3);
+  font-size: var(--fs-12);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.pa-lnk:hover {
+  color: var(--accent);
+}
+.pa-strip > .pa-num {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+.pa-num > div {
+  display: grid;
+  gap: 2px;
+}
+.pa-num b {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1;
+}
+.pa-num b small {
+  font-size: var(--fs-13);
+  color: var(--text-3);
+  font-weight: 400;
+}
+.pa-num span {
+  font-size: 11.5px;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+
+.tkb-filter {
+  display: inline-flex;
+  gap: 6px;
+}
+.tkb-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: inherit;
+  font-size: var(--fs-12);
+  padding: 5px 11px;
+  border-radius: 99px;
+  border: 1px solid var(--line-2);
+  color: var(--text-2);
+  background: var(--surface-2);
+  white-space: nowrap;
+  cursor: pointer;
+}
+.tkb-chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.tkb-chip.on {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+.tkb-board {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  align-items: start;
+}
+.tkb-lane {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 9px;
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  min-height: 120px;
+  min-width: 0;
+}
+.tkb-lane-h {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 4px 2px;
+  color: var(--text-3);
+}
+.tkb-lane-h b {
+  color: var(--text-2);
+  font-size: var(--fs-11);
+}
+.tkb-empty {
+  padding: 6px;
+}
+.tkb-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 11px 12px;
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+.tkb-h {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+}
+.tkb-title {
+  font-size: var(--fs-13);
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.tkb-title:hover {
+  color: var(--accent);
+}
+.tkb-flow {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 4px 8px;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  padding: 7px 8px;
+  border-radius: 7px;
+  background: var(--surface-2);
+  font-size: var(--fs-12);
+  min-width: 0;
+}
+.tkb-flow:hover,
+.tkb-flow:focus-visible {
+  box-shadow: 0 0 0 1px var(--accent);
+}
+.tkb-flow > .wf-mini {
+  grid-column: 1 / -1;
+}
+.tkb-del {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  align-items: center;
+  min-width: 0;
+}
+.tkb-del-chip {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font: 500 11px/1 var(--font-mono);
+  padding: 4px 7px;
+  border-radius: 4px;
+  background: var(--pending-soft);
+  color: var(--pending);
+}
+.tkb-next {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--fs-12);
+  color: var(--text-2);
+  overflow-wrap: anywhere;
+}
+.tkb-next.act {
+  color: var(--accent);
+}
+.tkb-next.warn {
+  color: var(--warn);
+}
+.tkb-next .btn {
+  flex: none;
+}
+.tkb-f {
+  display: flex;
+  gap: 4px 10px;
+  flex-wrap: wrap;
+  font-size: var(--fs-11);
+  color: var(--text-3);
+  border-top: 1px dashed var(--line);
+  padding-top: 7px;
+}
+.tkb-f span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.tkb-f svg {
+  width: 12px;
+  height: 12px;
+}
+@media (max-width: 1180px) {
+  .tkb-board {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .pa-strip {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .pa-strip > .pa-num {
+    grid-column: 1 / -1;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+}
+@media (max-width: 760px) {
+  .tkb-board {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .pa-strip {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .pa-strip > div + div {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+  .pa-sub {
+    white-space: normal;
+  }
+}

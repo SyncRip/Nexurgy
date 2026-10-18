@@ -1,0 +1,19 @@
+.mfg-value, .mfg-notice { min-width: 0; width: 100%; overflow-wrap: anywhere; }
+.mfg-row-head, .mfg-kind { display: flex; align-items: center; gap: 6px; }
+.mfg-row-head { flex-wrap: wrap; }
+.mfg-row-head > strong { flex: 1 1 150px; min-width: 0; }
+.mfg-kind { font-size: 12px; font-weight: 600; }
+.mfg-kind > svg { width: 14px; height: 14px; flex: none; }
+.mfg-rows, .mfg-tiers { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.mfg-row, .mfg-tier { display: grid; gap: 5px; min-width: 0; padding: 10px; border: 1px solid var(--line); border-radius: 6px; }
+.mfg-links { display: flex; flex-wrap: wrap; gap: 6px 12px; }
+.mfg-links:empty { display: none; }
+.mfg-links > a, .mfg-source { display: inline-flex; align-items: center; gap: 3px; font-size: 12px; }
+.mfg-links > a > svg, .mfg-source > svg { width: 12px; height: 12px; flex: none; }
+.mfg-tier dl { display: grid; gap: 4px; margin: 0; font-size: 12px; }
+.mfg-tier dl > div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; }
+.mfg-tier dd { margin: 0; font-variant-numeric: tabular-nums; font-weight: 600; }
+.mfg-value.compact .chip { max-width: 100%; white-space: normal; }
+@media (max-width: 480px) {
+  .mfg-links > a, .mfg-source { min-height: 36px; }
+}

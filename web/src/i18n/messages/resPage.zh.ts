@@ -1,0 +1,112 @@
+// Simplified Chinese messages for the resources and knowledge redesign (resPage). Keys must match resPage.en.ts.
+import type { ResPageKey } from './resPage.en';
+
+export const resPageZh: Record<ResPageKey, string> = {
+  'rp.backMaterials': '返回资料',
+  'rp.filters.active': '已选筛选条件',
+  'rp.filters.remove': '移除筛选：{label}',
+  'rp.filters.search': '搜索：{q}',
+  // Page and main views
+  'rp.subtitle': '查找和管理图纸、模型及工程资料。',
+  'rp.scope.explain': '范围说明',
+  'rp.scope.ownership': '添加资料时单独选择归属项目；跨项目查看不会改变资料归属。',
+  'rp.preview.navigation': '浏览筛选后的资料',
+  'rp.preview.previous': '上一份资料（↑）',
+  'rp.preview.next': '下一份资料（↓）',
+  'rp.views': '资源主视图',
+  'rp.view.files': '资料',
+  'rp.view.knowledge': '经验',
+  'rp.view.process': '使用记录',
+  'rp.count.partial': '{count}+',
+
+  // View scope
+  'rp.scope.region': '选择查看范围',
+  'rp.scope.label': '查看范围',
+  'rp.scope.groupProjects': '具体项目',
+  'rp.scope.groupCross': '跨项目',
+  'rp.scope.projectOption': '{name} · {code}',
+  'rp.scope.projectOptionArchived': '{name} · {code}（已归档）',
+  'rp.scope.all': '全部项目资料',
+  'rp.scope.project.title': '项目资料 · {code}',
+  'rp.scope.project.titleExp': '项目经验 · {code}',
+  'rp.scope.project.desc': '包含这个项目上传、手动创建和任务产出的资料。',
+  'rp.scope.project.descExp': '查看这个项目归档的成果、输入资料与固定版本。',
+  'rp.scope.all.title': '跨项目查看',
+  'rp.scope.all.desc': '查看所有可访问项目的资料。',
+  'rp.scope.all.descExp': '查看所有项目归档的经验，采用时再选择目标项目。',
+  'rp.scope.taskResults': '项目任务成果',
+  'rp.scope.taskResultsOf': '{name}的项目任务成果',
+
+  // Scope fallback notices
+  'rp.notice.url_project': '链接中的项目不存在或你没有访问权限，已改为查看“{scope}”。',
+  'rp.notice.url_invalid': '链接中的查看范围无效，已改为查看“{scope}”。',
+  'rp.notice.saved_project': '上次查看的项目已不可访问，已改为查看“{scope}”。',
+  'rp.notice.dismiss': '关闭提示',
+
+  // Toolbar
+  'rp.search.label': '搜索资料',
+  'rp.search.placeholder': '名称、图号或文件名',
+  'rp.filter.type': '资料类型',
+  'rp.filter.allTypes': '全部类型',
+  'rp.filter.creation': '创建方式',
+  'rp.filter.allCreation': '全部创建方式',
+  'rp.filter.part': '关联零件',
+  'rp.filter.allParts': '全部零件',
+  'rp.filter.status': '资料状态',
+  'rp.filter.allStatus': '全部状态',
+  'rp.filter.subtype': '细分：{kind}',
+  'rp.filter.removeSubtype': '移除“{kind}”筛选',
+  'rp.more': '更多',
+  'rp.more.archived': '显示已归档资料',
+  'rp.more.records': '查看范围内使用记录',
+  'rp.more.recordsNeedProject': '使用记录按项目保存，请先在“查看范围”中选择一个项目。',
+  'rp.more.clear': '清除筛选',
+
+
+  // List heading and loading status
+  'rp.count_one': '{count} 份资料',
+  'rp.count_other': '{count} 份资料',
+  'rp.list.note': '列表显示最新版本，历史版本可在详情中查看。',
+  'rp.load.status': '已加载 {loaded}/{total} 个项目',
+  'rp.load.loading': '还有 {count} 个正在加载…',
+  'rp.load.failed': '未能加载：',
+  'rp.load.retry': '重试 {code}',
+  'rp.load.truncated': '{code}：{sources}只列出了前一部分。',
+  'rp.load.projectFailed': '未能加载这个项目的资料。',
+  'rp.source.specs': '工程规格',
+  'rp.source.task_outputs': '任务成果登记（创建方式、任务正式版本）',
+
+  // Table
+  'rp.table.caption': '查看范围内的资料',
+  'rp.col.name': '资料名称',
+  'rp.col.type': '资料类型',
+  'rp.col.creation': '创建方式',
+  'rp.col.project': '所属项目',
+  'rp.col.version': '最新版本',
+  'rp.col.preview': '在线查看',
+  'rp.col.updated': '更新时间',
+  'rp.col.actions': '操作',
+  'rp.row.view': '查看',
+  'rp.row.open': '查看 {name}',
+  'rp.noVersion': '暂无版本',
+  'rp.chip.deprecated': '已停用',
+  'rp.chip.upstream': '上游有新版',
+  'rp.chip.failed': '生成失败',
+  'rp.chip.formal': '当前任务正式 {label}',
+  'rp.chip.formalTitle': '任务 {tasks} 验收的正式成果是 {label}（不是最新版本）',
+
+  // Empty and special states
+  'rp.empty.title': '还没有资料',
+  'rp.empty.body': '可以添加资料，或切换查看范围查找其他项目的资料。',
+  'rp.empty.archivedHint': '已归档资料可在“更多”中显示。',
+  'rp.noMatch.title': '没有找到资料',
+  'rp.noMatch.body': '试试其他关键词，或清除筛选。已归档资料可在“更多”中显示。',
+  'rp.item.missing': '在当前查看范围内没有找到链接中的资料，它可能已被移除，或属于未加载的项目。',
+
+  // Usage records
+  'rp.records.back': '返回资料',
+  'rp.records.title': '使用记录',
+  'rp.records.sub': '查看资料的准确版本在本项目哪些任务中作为输入、候选或正式成果使用。',
+  'rp.records.needProject.title': '使用记录按项目查看',
+  'rp.records.needProject.body': '请在上方“查看范围”中选择一个具体项目，查看它的使用记录。',
+};

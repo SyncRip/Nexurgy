@@ -1,0 +1,11 @@
+# Uploaded to Cloud Build (gcloud builds submit). Never ship local secrets or envs.
+.gcloudignore
+.env
+.env.*
+.venv/
+var/
+tests/
+.pytest_cache/
+__pycache__/
+**/__pycache__/
+*.egg-info/

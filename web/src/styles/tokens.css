@@ -1,0 +1,273 @@
+/* PartRoute design tokens.
+   Colour: graphite neutrals + one signal accent (industrial orange) + one measurement blue (blueprint cyan).
+   Status colours are always paired with an icon and a text label. */
+
+:root {
+  --font-sans: 'IBM Plex Sans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  --fs-11: 11px;
+  --fs-12: 12px;
+  --fs-13: 13px;
+  --fs-14: 14px;
+  --fs-16: 16px;
+  --fs-20: 20px;
+  --fs-28: 28px;
+  --fs-display: clamp(32px, 4.1vw, 60px);
+
+  /* Type scale 2.0: size and line-height are always used as a pair.
+     --fs-* stay as aliases until P3; 11px is reserved for canvas annotations. */
+  --text-xs: 12px;
+  --leading-xs: 16px;
+  --text-sm: 13px;
+  --leading-sm: 20px;
+  --text-md: 14px;
+  --leading-md: 22px;
+  --text-lg: 16px;
+  --leading-lg: 24px;
+  --text-xl: 20px;
+  --leading-xl: 28px;
+  --text-2xl: 24px;
+  --leading-2xl: 32px;
+  --text-display: var(--fs-display);
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-strong: 600;
+
+  /* Spacing 2.0: 4px baseline, name = value / 4 (sp-1_5 = 6px).
+     sp-5/6/8 had no references when they moved to the 2.0 values. */
+  --sp-0_5: 2px;
+  --sp-1: 4px;
+  --sp-1_5: 6px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+
+  /* Radius 2.0; --r-1..3 stay as aliases until P3. */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+  --radius-full: 999px;
+  --r-1: 6px;
+  --r-2: 8px;
+  --r-3: 10px;
+
+  /* Layers: the only z-index values allowed in CSS. Portaled popups live
+     outside #root (isolation: isolate), so in-page layers never cover them. */
+  --z-base: 0;
+  --z-sticky: 10;
+  --z-canvas-overlay: 20;
+  --z-dock: 30;
+  --z-dropdown: 40;
+  --z-drawer: 50;
+  --z-modal: 60;
+  --z-toast: 70;
+  --z-tooltip: 80;
+  /* Local ordering inside one isolated component only (badge over a thumbnail,
+     dot over a timeline rail). Never compare these across components. */
+  --z-behind: -1;
+  --z-raised: 1;
+
+  /* Breakpoints (custom properties cannot be used in @media; mirrored in
+     components/ui/breakpoints.ts): sm 640 · md 1024 · lg 1280 · xl 1600. */
+
+  --dur-fast: 120ms;
+  --dur-mid: 180ms;
+  --dur-panel: 220ms;
+  --dur-slow: 480ms;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+
+  /* Component sizes (L3). */
+  --control-h-sm: 26px;
+  --control-h-md: 36px;
+  --control-h-lg: 40px;
+  --row-h-compact: 32px;
+  --row-h-comfort: 40px;
+
+  --rail-w: 232px;
+  --rail-w-compact: 64px;
+  --top-h: 52px;
+  --bottom-h: 60px;
+  --page-max: 1480px;
+}
+
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0e1217;
+  --bg-2: #121820;
+  --surface: #171e28;
+  --surface-2: #1e2733;
+  --surface-3: #283340;
+  --line: #2a3542;
+  --line-2: #3b4857;
+  --text: #eef2f7;
+  --text-2: #c0cad6;
+  --text-3: #95a1b2;
+  --accent: #ff9b59;
+  --accent-2: #ffb27d;
+  --accent-soft: rgba(255, 155, 89, 0.12);
+  --accent-ink: #25190f;
+  --measure: #42b8ff;
+  --measure-soft: rgba(66, 184, 255, 0.14);
+  --ok: #3ecf8e;
+  --ok-soft: rgba(62, 207, 142, 0.14);
+  --warn: #f5b93b;
+  --warn-soft: rgba(245, 185, 59, 0.14);
+  --err: #ff6161;
+  --err-soft: rgba(255, 97, 97, 0.14);
+  --stale: #b69cff;
+  --stale-soft: rgba(182, 156, 255, 0.15);
+  --pending: #8791a0;
+  --pending-soft: rgba(135, 145, 160, 0.14);
+  --shadow: 0 12px 32px rgba(3, 6, 10, 0.46);
+  --shadow-card: 0 4px 16px rgba(3, 6, 10, 0.26);
+  --focus: 0 0 0 2px var(--bg), 0 0 0 4px rgba(56, 189, 216, 0.75);
+  --grid-line: rgba(66, 184, 255, 0.045);
+  --scrim: rgba(4, 7, 11, 0.64);
+  --skel: #171e28;
+  --skel-hi: #212b38;
+  --rail-bg: #121820;
+  --top-bg: #171e28;
+
+  /* Brand "blueprint" environment: cyan → steel, reusing the measurement hue.
+     Decoration / ambient only — never for body text. */
+  --brand-cyan: #38bdd8;
+  --brand-steel: #567fc8;
+  --grad-aurora: linear-gradient(135deg, #2f9fc0 0%, #38bdd8 50%, #567fc8 100%);
+  --grad-aurora-soft: linear-gradient(135deg, rgba(56, 189, 216, 0.14), rgba(86, 127, 200, 0.1));
+  --halo-brand: radial-gradient(60% 60% at 50% 0%, rgba(56, 189, 216, 0.18), transparent 70%);
+
+  /* Glass (presentation surfaces only; work surfaces stay opaque). */
+  --glass-bg: rgba(20, 27, 36, 0.55);
+  --glass-bg-strong: rgba(22, 29, 40, 0.72);
+  --glass-blur: blur(20px) saturate(135%);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.07);
+  --glass-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+
+  /* Glow: brand (cyan) for hover / selection, accent (orange) for actions. */
+  --glow-brand: 0 0 0 1px rgba(56, 189, 216, 0.42), 0 0 22px rgba(56, 189, 216, 0.2);
+  --glow-accent: 0 0 0 1px rgba(255, 155, 89, 0.5), 0 0 20px rgba(255, 155, 89, 0.22);
+
+  --dw-paper: #0f151d;
+  --dw-grid: rgba(66, 184, 255, 0.05);
+  --dw-ink: #e6edf5;
+  --dw-hidden: #8ea2b7;
+  --dw-center: #d18a5a;
+  --dw-dim: #52c0ff;
+  --dw-text: #d2dbe6;
+  --dw-frame: #6f7e90;
+  --dw-sketch: #3ecf8e;
+
+  --on-solid: #ffffff;
+  --elev-0: none;
+  --elev-1: 0 2px 8px rgba(3, 6, 10, 0.2);
+  --elev-2: var(--shadow-card);
+  --elev-3: var(--shadow);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: #f4f6f8;
+  --bg-2: #eef1f4;
+  --surface: #ffffff;
+  --surface-2: #f8fafc;
+  --surface-3: #edf1f5;
+  --line: #dfe5ec;
+  --line-2: #c7d0db;
+  --text: #202630;
+  --text-2: #4f5b6b;
+  --text-3: #606d7d;
+  --accent: #bd4b0b;
+  --accent-2: #a64008;
+  --accent-soft: rgba(189, 75, 11, 0.08);
+  --accent-ink: #ffffff;
+  --measure: #176b9b;
+  --measure-soft: rgba(23, 107, 155, 0.09);
+  --ok: #12885a;
+  --ok-soft: rgba(18, 136, 90, 0.1);
+  --warn: #a86b06;
+  --warn-soft: rgba(168, 107, 6, 0.1);
+  --err: #cc3434;
+  --err-soft: rgba(204, 52, 52, 0.09);
+  --stale: #6d4fd0;
+  --stale-soft: rgba(109, 79, 208, 0.1);
+  --pending: #6c7684;
+  --pending-soft: rgba(108, 118, 132, 0.1);
+  --shadow: 0 16px 40px rgba(35, 53, 77, 0.16);
+  --shadow-card: 0 6px 20px rgba(35, 53, 77, 0.1);
+  --focus: 0 0 0 2px var(--bg), 0 0 0 4px var(--measure);
+  --grid-line: rgba(10, 115, 180, 0.05);
+  --scrim: rgba(17, 21, 26, 0.38);
+  --skel: #e7eaee;
+  --skel-hi: #f3f5f7;
+  --rail-bg: #eef1f4;
+  --top-bg: #ffffff;
+
+  /* Blueprint environment (light): on a near-white page a translucent wash
+     reads as "nothing", so the ambient cues lean on a slightly stronger tint
+     and a cool-tinted frost rather than glow (which white washes out). */
+  --brand-cyan: #0a73b4;
+  --brand-steel: #3d6fb0;
+  --grad-aurora: linear-gradient(135deg, #1183c0 0%, #0a73b4 50%, #3d6fb0 100%);
+  --grad-aurora-soft: linear-gradient(135deg, rgba(10, 115, 180, 0.12), rgba(61, 111, 176, 0.08));
+  --halo-brand: radial-gradient(58% 58% at 50% 0%, rgba(10, 115, 180, 0.16), transparent 72%);
+
+  /* Glass (light): a cool-tinted frost (not plain white) so it separates from
+     the white page, with a crisp top highlight and a visible edge. */
+  --glass-bg: rgba(238, 244, 249, 0.72);
+  --glass-bg-strong: rgba(244, 248, 251, 0.86);
+  --glass-blur: blur(18px) saturate(130%);
+  --glass-border: 1px solid rgba(35, 53, 77, 0.1);
+  --glass-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+  /* Glow (light): a solid brand edge carries the state; the soft bloom is kept
+     small because a near-white page cannot show a wide glow. */
+  --glow-brand: 0 0 0 1px rgba(10, 115, 180, 0.55), 0 2px 10px rgba(10, 115, 180, 0.16);
+  --glow-accent: 0 0 0 1px rgba(189, 75, 11, 0.5), 0 2px 10px rgba(189, 75, 11, 0.18);
+
+  --dw-paper: #fbfaf6;
+  --dw-grid: rgba(10, 115, 180, 0.05);
+  --dw-ink: #15191e;
+  --dw-hidden: #56657a;
+  --dw-center: #b0561d;
+  --dw-dim: #0a6aa6;
+  --dw-text: #1e242b;
+  --dw-frame: #5c6776;
+  --dw-sketch: #12885a;
+
+  --on-solid: #ffffff;
+  --elev-0: none;
+  --elev-1: 0 2px 8px rgba(35, 53, 77, 0.06);
+  --elev-2: var(--shadow-card);
+  --elev-3: var(--shadow);
+}
+
+/* L2 semantic aliases. Theme blocks above only remap L1 values; component
+   and page CSS should prefer these names. */
+:root {
+  --color-bg-canvas: var(--bg);
+  --color-bg-sunken: var(--bg-2);
+  --color-bg-surface: var(--surface);
+  --color-bg-raised: var(--surface-2);
+  --color-bg-hover: var(--surface-3);
+  --color-text-primary: var(--text);
+  --color-text-secondary: var(--text-2);
+  --color-text-tertiary: var(--text-3);
+  --color-border-subtle: var(--line);
+  --color-border-default: var(--line-2);
+  --color-action-primary: var(--accent);
+  --color-action-primary-hover: var(--accent-2);
+  --color-action-primary-ink: var(--accent-ink);
+  --color-focus-ring: var(--focus);
+  --color-brand: var(--brand-cyan);
+  --color-brand-gradient: var(--grad-aurora);
+}

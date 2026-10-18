@@ -1,0 +1,126 @@
+/* "Add to AI" entries on business pages (frontend D: AddToAiButton, SelectionToolbar, page adapters). */
+
+/* Never part of a text excerpt selected around them. */
+.ar-btn,
+.ar-sel-toolbar {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.ar-btn[aria-disabled='true'] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.ar-btn[aria-busy='true'] {
+  cursor: progress;
+}
+.ar-actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2);
+  min-width: 0;
+}
+/* In a table row's action cell the entries stay on one line (the table scrolls inside its box). */
+.row-actions .ar-actions {
+  flex-wrap: nowrap;
+  gap: 2px;
+}
+
+/* Floating "Add selection to AI" button over a text selection. */
+.ar-sel-toolbar {
+  position: fixed;
+  z-index: var(--z-tooltip);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  max-width: calc(100vw - 16px);
+  padding: 3px;
+  border-radius: var(--r-2);
+  border: 1px solid var(--line-2);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+.ar-sel-toolbar .faint {
+  padding: 0 6px 0 2px;
+  font-size: var(--fs-11);
+  white-space: nowrap;
+}
+
+/* Inspect panel: AI block for the current face / edge. */
+.ar-sel-ai {
+  display: grid;
+  gap: var(--sp-2);
+  padding-top: var(--sp-2);
+  border-top: 1px dashed var(--line-2);
+}
+.ar-cands {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.ar-cand {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px var(--sp-2);
+  align-items: start;
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-1);
+  cursor: pointer;
+  min-width: 0;
+}
+.ar-cand:has(input:checked) {
+  border-color: var(--measure);
+  background: var(--measure-soft);
+}
+.ar-cand input {
+  margin-top: 2px;
+}
+.ar-cand-reason {
+  grid-column: 2;
+  overflow-wrap: anywhere;
+}
+
+/* Customer drawing rows (drawings tab). */
+.ar-files {
+  display: grid;
+  gap: var(--sp-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ar-file {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+.ar-file-name {
+  overflow-wrap: anywhere;
+}
+
+/* Quote cost lines: narrow action column. */
+.ar-col-act {
+  width: 1%;
+  white-space: nowrap;
+  text-align: right;
+}
+
+/* The revision bar gains an "Add Rn to AI" button: let its actions wrap on phones (no page overflow at 375 px). */
+@media (max-width: 760px) {
+  .ws-revbar-act {
+    flex-wrap: wrap;
+  }
+}
+
+/* Panel headers that gained an "Add to AI" button (quote, asset version, task objective) wrap on phones. */
+@media (max-width: 760px) {
+  .panel-h:has(> .ar-btn) {
+    flex-wrap: wrap;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+}

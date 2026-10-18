@@ -1,0 +1,128 @@
+/* Select skin (Select.tsx). The trigger mirrors .input; the list mirrors .menu. */
+
+.pr-select {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
+  min-width: 0;
+  height: var(--control-h-md);
+  padding: 0 var(--sp-2) 0 calc(var(--sp-2) + var(--sp-0_5));
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  font-size: var(--text-sm);
+  line-height: var(--leading-sm);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease);
+}
+.pr-select--sm {
+  height: var(--control-h-sm);
+  padding: 0 var(--sp-1) 0 var(--sp-1_5);
+  font-size: var(--text-xs);
+  line-height: var(--leading-xs);
+}
+.pr-select:hover:not([data-disabled]) {
+  border-color: var(--color-text-tertiary);
+}
+.pr-select:focus-visible,
+.pr-select[data-popup-open] {
+  outline: none;
+  border-color: var(--measure);
+  box-shadow: 0 0 0 3px var(--measure-soft);
+}
+.pr-select[aria-invalid='true'] {
+  border-color: var(--err);
+}
+.pr-select[data-disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.pr-select__value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pr-select[data-placeholder] .pr-select__value {
+  color: var(--color-text-tertiary);
+}
+.pr-select__icon {
+  display: inline-flex;
+  flex: none;
+  color: var(--color-text-tertiary);
+}
+.pr-select__icon svg {
+  width: 14px;
+  height: 14px;
+  transition: transform var(--dur-fast) var(--ease);
+}
+.pr-select[data-popup-open] .pr-select__icon svg {
+  transform: rotate(180deg);
+}
+
+/* Same layer as portaled menus: opened from a dialog, it sits above it by DOM order. */
+.pr-select-positioner {
+  z-index: var(--z-modal);
+}
+.pr-select__popup {
+  min-width: var(--anchor-width);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-raised);
+  box-shadow: var(--elev-3);
+  transform-origin: var(--transform-origin);
+  transition:
+    opacity var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+.pr-select__popup[data-starting-style],
+.pr-select__popup[data-ending-style] {
+  opacity: 0;
+  transform: scale(0.98);
+}
+.pr-select__list {
+  max-height: min(320px, var(--available-height));
+  padding: var(--sp-1);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.pr-select__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  min-height: var(--control-h-sm);
+  padding: var(--sp-1) var(--sp-2);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-primary);
+  font-size: var(--text-sm);
+  line-height: var(--leading-sm);
+  cursor: default;
+  user-select: none;
+  outline: none;
+}
+.pr-select__item[data-highlighted] {
+  background: var(--color-bg-hover);
+}
+.pr-select__item[data-selected] {
+  font-weight: var(--weight-medium);
+}
+.pr-select__item[data-disabled] {
+  opacity: 0.45;
+}
+.pr-select__check {
+  display: inline-flex;
+  color: var(--accent);
+}
+.pr-select__check svg {
+  width: 14px;
+  height: 14px;
+}
+
+:root[data-motion='reduced'] .pr-select,
+:root[data-motion='reduced'] .pr-select__icon svg,
+:root[data-motion='reduced'] .pr-select__popup {
+  transition: none;
+}

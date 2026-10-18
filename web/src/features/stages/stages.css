@@ -1,0 +1,269 @@
+/* Stages, stage reviews, completion guard and the project-creation stage list.
+   Tokens only; every class is prefixed stg-. */
+
+.stg-blockers {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 4px;
+  font-size: var(--fs-12);
+}
+.stg-blockers li {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  line-height: 1.45;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.stg-blockers svg {
+  width: 13px;
+  height: 13px;
+  flex: none;
+  margin-top: 2px;
+}
+.stg-blockers.err svg {
+  color: var(--err);
+}
+.stg-blockers.warn svg {
+  color: var(--warn);
+}
+
+/* stage list on the overview */
+.stg-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+.stg-item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 4px 10px;
+  align-items: start;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  background: var(--surface);
+  min-width: 0;
+}
+.stg-item.current {
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  background: var(--accent-soft);
+}
+.stg-item.accepted .stg-seq {
+  border-color: var(--ok);
+  color: var(--ok);
+}
+.stg-seq {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid var(--line-2);
+  font-size: var(--fs-12);
+  background: var(--surface);
+}
+.stg-seq svg {
+  width: 14px;
+  height: 14px;
+}
+.stg-body {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+.stg-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.stg-title .strong {
+  overflow-wrap: anywhere;
+}
+.stg-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  color: var(--text-3);
+  font-size: var(--fs-12);
+}
+.stg-detail {
+  grid-column: 2 / -1;
+  min-width: 0;
+}
+.stg-ready {
+  display: grid;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px dashed var(--line-2);
+  border-radius: var(--r-2);
+  background: var(--surface);
+}
+.stg-tasks {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 2px;
+}
+.stg-tasks li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  padding: 4px 0;
+  min-width: 0;
+  font-size: var(--fs-12);
+}
+.stg-tasks li + li {
+  border-top: 1px solid var(--line);
+}
+.stg-tasks a {
+  color: var(--text);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.stg-history > summary {
+  cursor: pointer;
+  color: var(--text-2);
+  font-size: var(--fs-12);
+  padding: 2px 0;
+  width: fit-content;
+}
+.stg-reviews {
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+.stg-reviews > li {
+  display: grid;
+  gap: 4px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  min-width: 0;
+}
+.stg-note {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: var(--text-2);
+}
+
+/* review dialog */
+.stg-ref {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.stg-ref svg {
+  width: 15px;
+  height: 15px;
+  color: var(--measure);
+}
+.stg-picked {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 4px;
+}
+.stg-picked li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  min-width: 0;
+}
+.stg-suggest {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.stg-picker-box {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  border: 1px dashed var(--line-2);
+  border-radius: var(--r-2);
+}
+
+/* frozen review snapshot */
+.stg-snap-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+.stg-snap-list > li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  min-width: 0;
+}
+.stg-snap-list a {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* stage list on project creation */
+.stg-mode {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.stg-rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+.stg-rows li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.stg-rows .input {
+  flex: 1;
+  min-width: 0;
+}
+.stg-default-list {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--text-2);
+  font-size: var(--fs-13);
+}
+
+@media (max-width: 767px) {
+  .stg-item {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .stg-item > .row-actions {
+    grid-column: 2;
+    justify-self: start;
+  }
+  .stg-detail {
+    grid-column: 1 / -1;
+  }
+}

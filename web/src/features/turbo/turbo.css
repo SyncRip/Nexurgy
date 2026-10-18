@@ -1,0 +1,232 @@
+/* W7 Turbo: policy selector, assumption list and verification chips. */
+
+.tb-policy {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-2);
+  min-width: 0;
+}
+@media (max-width: 560px) {
+  .tb-policy {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.tb-policy-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 2px 10px;
+  align-items: start;
+  padding: 10px 12px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-2);
+  background: var(--surface);
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  min-width: 0;
+}
+.tb-policy-card:hover:not(:disabled) {
+  border-color: var(--text-3);
+}
+.tb-policy-card:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+.tb-policy-card[aria-checked='true'] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.tb-policy-card.turbo[aria-checked='true'] {
+  border-color: var(--warn);
+  background: var(--warn-soft);
+}
+.tb-policy-radio {
+  grid-row: 1 / span 2;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  border-radius: 50%;
+  border: 1px solid var(--line-2);
+  background: var(--bg-2);
+}
+.tb-policy-card[aria-checked='true'] .tb-policy-radio {
+  border: 5px solid var(--accent);
+  background: var(--surface);
+}
+.tb-policy-card.turbo[aria-checked='true'] .tb-policy-radio {
+  border-color: var(--warn);
+}
+.tb-policy-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: var(--fs-13);
+}
+.tb-policy-title svg {
+  width: 15px;
+  height: 15px;
+  color: var(--text-3);
+}
+.tb-policy-desc {
+  color: var(--text-3);
+  font-size: var(--fs-12);
+  overflow-wrap: anywhere;
+}
+
+/* compact variant (composer, run buttons) */
+.tb-policy-compact {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-2);
+  background: var(--bg-2);
+}
+.tb-policy-compact button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border: 0;
+  border-radius: var(--r-1);
+  background: transparent;
+  color: var(--text-2);
+  font-size: var(--fs-12);
+  cursor: pointer;
+}
+.tb-policy-compact button svg {
+  width: 13px;
+  height: 13px;
+}
+.tb-policy-compact button[aria-checked='true'] {
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 600;
+}
+.tb-policy-compact button.turbo[aria-checked='true'] {
+  background: var(--warn-soft);
+  color: var(--text);
+}
+.tb-policy-compact button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.tb-assumptions {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  min-width: 0;
+}
+.tb-assumptions li {
+  display: grid;
+  gap: 2px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--warn);
+  border-radius: var(--r-1);
+  background: var(--surface);
+  min-width: 0;
+}
+.tb-assumption-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 8px;
+  min-width: 0;
+}
+.tb-assumption-subject {
+  font-family: var(--font-mono);
+  font-size: var(--fs-12);
+  color: var(--text-2);
+  overflow-wrap: anywhere;
+}
+.tb-assumption-value {
+  font-weight: 600;
+  font-size: var(--fs-13);
+  overflow-wrap: anywhere;
+}
+.tb-assumption-basis {
+  color: var(--text-3);
+  font-size: var(--fs-12);
+  overflow-wrap: anywhere;
+}
+
+/* AI decisions (generation supplement D): one line per decision, state on the left border, groups by object. */
+.tb-assumptions li[data-state='confirmed'] {
+  border-left-color: var(--ok);
+}
+.tb-assumptions li[data-state='corrected'],
+.tb-assumptions li[data-problems] {
+  border-left-color: var(--err);
+}
+.tb-assumptions li[data-state='replaced'],
+.tb-assumptions li[data-state='person'] {
+  border-left-color: var(--line-2);
+}
+.tb-decision-line {
+  font-size: var(--fs-13);
+  overflow-wrap: anywhere;
+}
+.tb-decision-form {
+  display: flex;
+  flex: 1 1 100%;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  min-width: 0;
+}
+.tb-decision-form > .tb-assumption-basis {
+  flex: 1 1 100%;
+}
+.tb-decision-form .input {
+  flex: 1 1 160px;
+  min-width: 0;
+}
+.tb-decision-groups {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+.tb-decision-group {
+  border: 1px solid var(--line);
+  border-radius: var(--r-1);
+  background: var(--bg-2);
+  min-width: 0;
+}
+.tb-decision-group > summary {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: var(--fs-12);
+  color: var(--text-2);
+}
+.tb-decision-group > .tb-assumptions {
+  padding: 0 6px 6px;
+}
+.tb-chips {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+}
+.tb-note {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  color: var(--text-3);
+  font-size: var(--fs-12);
+}
+.tb-note svg {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  margin-top: 2px;
+}

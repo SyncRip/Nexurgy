@@ -1,0 +1,169 @@
+/* Tabs / SegmentedControl skin (Tabs.tsx). The line indicator is Base UI's
+   Tabs.Indicator, positioned with --active-tab-left / --active-tab-width. */
+
+.pr-tabs__list {
+  position: relative;
+  display: flex;
+  gap: var(--sp-0_5);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.pr-tabs__list::-webkit-scrollbar {
+  display: none;
+}
+.pr-tabs__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1_5);
+  border: 0;
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+  line-height: var(--leading-sm);
+  font-weight: var(--weight-medium);
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease);
+}
+.pr-tabs__tab svg {
+  width: 15px;
+  height: 15px;
+  flex: none;
+  color: var(--color-text-tertiary);
+}
+.pr-tabs__tab:hover:not([data-disabled]) {
+  color: var(--color-text-primary);
+}
+.pr-tabs__tab[data-active] {
+  color: var(--color-text-primary);
+}
+.pr-tabs__tab[data-active] svg {
+  color: var(--accent);
+}
+.pr-tabs__tab[data-disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.pr-tabs__meta {
+  min-width: 18px;
+  padding: 0 var(--sp-1_5);
+  border-radius: var(--radius-full);
+  background: var(--color-bg-hover);
+  color: var(--color-text-secondary);
+  font-size: var(--text-xs);
+  line-height: var(--leading-xs);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+.pr-tabs__panel:focus-visible {
+  border-radius: var(--radius-sm);
+}
+
+/* line: section tabs with an underline indicator */
+.pr-tabs--line .pr-tabs__list {
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+.pr-tabs--line .pr-tabs__tab {
+  height: var(--control-h-lg);
+  padding: 0 var(--sp-3);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+.pr-tabs--line .pr-tabs__tab:hover:not([data-disabled]) {
+  background: var(--color-bg-raised);
+}
+.pr-tabs--line .pr-tabs__indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: var(--active-tab-width);
+  transform: translateX(var(--active-tab-left));
+  background: var(--accent);
+  transition:
+    transform var(--dur-mid) var(--ease-out),
+    width var(--dur-mid) var(--ease-out);
+}
+
+/* pill: compact boxed tabs inside a sunken track */
+.pr-tabs--pill .pr-tabs__list {
+  display: inline-flex;
+  padding: var(--sp-0_5);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-sunken);
+}
+.pr-tabs--pill .pr-tabs__tab {
+  height: var(--control-h-sm);
+  padding: 0 var(--sp-2);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  line-height: var(--leading-xs);
+}
+.pr-tabs--pill .pr-tabs__tab[data-active] {
+  background: var(--color-bg-hover);
+  box-shadow: var(--elev-1);
+}
+.pr-tabs--pill .pr-tabs__indicator {
+  display: none;
+}
+
+/* SegmentedControl */
+.pr-seg {
+  display: inline-flex;
+  gap: var(--sp-0_5);
+  padding: var(--sp-0_5);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-sunken);
+}
+.pr-seg__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-1);
+  height: var(--control-h-sm);
+  padding: 0 var(--sp-2);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text-tertiary);
+  font-size: var(--text-xs);
+  line-height: var(--leading-xs);
+  font-weight: var(--weight-strong);
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease);
+}
+.pr-seg--md .pr-seg__item {
+  height: calc(var(--control-h-md) - 6px);
+  padding: 0 var(--sp-3);
+  font-size: var(--text-sm);
+  line-height: var(--leading-sm);
+}
+.pr-seg__item svg {
+  width: 14px;
+  height: 14px;
+  flex: none;
+}
+.pr-seg__item:hover:not([data-disabled]) {
+  color: var(--color-text-primary);
+}
+.pr-seg__item[data-pressed] {
+  background: var(--color-bg-hover);
+  color: var(--color-text-primary);
+  box-shadow: inset 0 -2px 0 var(--accent);
+}
+.pr-seg__item[data-disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+:root[data-motion='reduced'] .pr-tabs__tab,
+:root[data-motion='reduced'] .pr-tabs__indicator,
+:root[data-motion='reduced'] .pr-seg__item {
+  transition: none;
+}

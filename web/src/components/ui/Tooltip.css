@@ -1,0 +1,35 @@
+/* Tooltip skin (Tooltip.tsx). Inverted surface so it reads in both themes. */
+
+.pr-tooltip-positioner {
+  z-index: var(--z-tooltip);
+}
+.pr-tooltip {
+  max-width: 280px;
+  padding: var(--sp-1) var(--sp-2);
+  border-radius: var(--radius-sm);
+  background: var(--color-text-primary);
+  color: var(--color-bg-canvas);
+  font-size: var(--text-xs);
+  line-height: var(--leading-xs);
+  font-weight: var(--weight-medium);
+  box-shadow: var(--elev-1);
+  transform-origin: var(--transform-origin);
+  transition:
+    opacity var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+.pr-tooltip[data-starting-style],
+.pr-tooltip[data-ending-style] {
+  opacity: 0;
+  transform: scale(0.96);
+}
+.pr-tooltip[data-ending-style] {
+  transition-timing-function: var(--ease-in);
+}
+/* Opening instantly inside a provider group: no fade between neighbours. */
+.pr-tooltip[data-instant] {
+  transition: none;
+}
+:root[data-motion='reduced'] .pr-tooltip {
+  transition: none;
+}

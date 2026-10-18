@@ -1,0 +1,152 @@
+/* Journey cards retain one mounted action/result surface; native disclosures only reduce supporting detail. */
+.as-op-journey {
+  gap: 12px;
+  padding: 12px;
+  box-shadow: none;
+}
+.as-op-journey > .as-op-h {
+  row-gap: 8px;
+}
+.as-op-disclosure {
+  min-width: 0;
+  border-top: 1px solid var(--line-2);
+  font-size: var(--fs-12);
+}
+.as-op-disclosure > summary {
+  padding: 10px 0;
+  color: var(--text-2);
+  font-weight: 500;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+.as-op-disclosure > summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--r-1);
+}
+.as-op-disclosure > summary > span {
+  margin-inline-start: 8px;
+}
+.as-op-disclosure-body {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  padding-bottom: 8px;
+}
+.as-op-design-title {
+  color: var(--text-3);
+  font-weight: 400;
+}
+.as-op-design > .as-design-plan {
+  margin: 0 0 8px;
+}
+.as-op-journey .as-step:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--r-1);
+}
+
+/* Saved CAD, its exact-version actions and supporting facts form one delivery. */
+.as-cad-result {
+  gap: 12px;
+  padding: 12px;
+}
+.as-cad-result .as-result-name {
+  overflow-wrap: anywhere;
+  overflow: visible;
+  text-overflow: clip;
+  white-space: normal;
+}
+.as-cad-delivery-body {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 14px;
+  min-width: 0;
+}
+.as-cad-delivery-main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+  min-width: 0;
+}
+.as-cad-drawing-delivery {
+  grid-template-columns: minmax(0, 1fr);
+}
+.as-cad-drawing-delivery .prog-result-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+}
+.as-cad-drawing-delivery .prog-result-image {
+  height: 200px;
+}
+.as-cad-state {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.as-cad-check-note {
+  color: var(--text-2);
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.as-cad-files {
+  width: 100%;
+  min-width: 0;
+}
+.as-cad-files > summary,
+.as-cad-details summary {
+  cursor: pointer;
+  padding: 8px 0;
+  font-size: var(--fs-12);
+  font-weight: 500;
+  color: var(--text-2);
+}
+.as-cad-files > summary:focus-visible,
+.as-cad-details summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--r-1);
+}
+.as-cad-details {
+  display: grid;
+  min-width: 0;
+}
+.as-cad-details > details {
+  min-width: 0;
+  border-top: 1px solid var(--line-2);
+  overflow-wrap: anywhere;
+}
+.as-cad-details dl,
+.as-cad-details ul {
+  margin-block: 6px 10px;
+  font-size: var(--fs-12);
+}
+.as-cad-details ul {
+  padding-inline-start: 18px;
+}
+.as-cad-raw-checks dd {
+  margin-inline-start: 12px;
+  white-space: pre-wrap;
+}
+.as-cad-result .as-result-actions .btn {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 767px) {
+  .as-op-journey {
+    padding: 10px;
+  }
+  .as-op-disclosure > summary {
+    min-height: 44px;
+  }
+  .as-cad-result {
+    padding: 10px;
+  }
+  .as-cad-result .btn,
+  .as-cad-files > summary,
+  .as-cad-details summary {
+    min-height: 44px;
+  }
+}

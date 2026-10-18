@@ -1,0 +1,251 @@
+/* Assembly drawings tab (W5): package list + detail, page previews, downloads, overlay editor. Desktop and 375 px. */
+
+.asmd {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+.asmd-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+}
+.asmd-intro {
+  margin: 0;
+}
+.asmd-grid {
+  display: grid;
+  grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+.asmd-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+  max-height: calc(100vh - 240px);
+  overflow: auto;
+}
+.asmd-card {
+  display: grid;
+  gap: 6px;
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+}
+.asmd-card:hover {
+  border-color: var(--line-2);
+  background: var(--surface-2);
+}
+.asmd-card.active {
+  border-color: var(--accent);
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+.asmd-card-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  align-items: baseline;
+}
+.asmd-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.asmd-detail {
+  min-width: 0;
+}
+.asmd-pkg-h {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.asmd-pkg-title {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  align-items: center;
+  min-width: 0;
+}
+.asmd-actions,
+.asmd-files {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+.asmd-pagetabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+.asmd-pagetab {
+  display: grid;
+  gap: 2px;
+  flex: none;
+  text-align: left;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  max-width: 220px;
+}
+.asmd-pagetab.active {
+  border-color: var(--accent);
+  background: var(--surface-2);
+}
+.asmd-page {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+.asmd-page-h {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+.asmd-preview {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 420 / 297;
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  background: #fff; /* drawings are black on white in every theme */
+  overflow: hidden;
+}
+.asmd-preview img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.asmd-two {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+  gap: 12px;
+  align-items: start;
+}
+.asmd-balloons {
+  list-style: none;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+  max-height: 360px;
+  overflow: auto;
+}
+.asmd-balloon {
+  display: inline-grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 4px;
+  border: 1.5px solid currentColor;
+  border-radius: 999px;
+  font-size: var(--fs-12);
+}
+.asmd-path {
+  overflow-wrap: anywhere;
+}
+.asmd-kv {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 4px 12px;
+}
+.asmd-kv > span:nth-child(odd) {
+  color: var(--text-2);
+}
+.asmd-sub {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.asmd-plain {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+.asmd-err {
+  color: var(--err);
+}
+.asmd-raw {
+  max-height: 320px;
+  overflow: auto;
+  font-size: var(--fs-12);
+  white-space: pre;
+}
+.asmd-checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+}
+.asmd-plane {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.asmd-num {
+  width: 84px;
+  text-align: right;
+}
+.asmd-keydim {
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  padding: 8px 10px;
+  display: grid;
+  gap: 6px;
+}
+.asmd-keydim-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+.asmd-add {
+  justify-self: start;
+}
+.asmd-moves td {
+  vertical-align: top;
+}
+.asmd-bad td {
+  background: var(--err-soft);
+}
+.asmd-note-row {
+  gap: 6px;
+}
+
+@media (max-width: 900px) {
+  .asmd-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .asmd-list {
+    max-height: 260px;
+  }
+}
+
+@media (max-width: 480px) {
+  .asmd-keydim-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .asmd-kv {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .asmd-num {
+    width: 64px;
+  }
+}

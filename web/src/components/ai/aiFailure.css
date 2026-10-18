@@ -1,0 +1,103 @@
+/* AI failure diagnostics (W1, AiFailureDetails.tsx) and the credential parts of the model configuration dialog. */
+
+.ai-diag {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.ai-diag-title {
+  font-size: var(--fs-12);
+  font-weight: 600;
+  color: var(--text-3);
+}
+.ai-diag-code {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+}
+.ai-diag-grid {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 2px 12px;
+  margin: 0;
+}
+.ai-diag-grid dt {
+  color: var(--text-3);
+}
+.ai-diag-grid dd {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.ai-diag-ids {
+  display: flex;
+  flex-direction: column;
+  user-select: all;
+}
+.ai-diag-recovery {
+  margin: 2px 0 0;
+  padding-left: 18px;
+}
+.ai-failure-causes {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.ai-failure-causes > p {
+  margin: 6px 0;
+}
+.ai-failure-causes > ul {
+  margin: 8px 0 0;
+  padding-left: 18px;
+}
+.ai-failure-causes > ul > li + li {
+  margin-top: 10px;
+}
+.ai-cause-message {
+  margin: 3px 0;
+  white-space: pre-wrap;
+}
+.ai-failure-causes summary {
+  cursor: pointer;
+}
+@media (max-width: 480px) {
+  .ai-diag-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ai-diag-grid dt {
+    margin-top: 4px;
+  }
+}
+
+.mc-cred {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-2);
+  min-width: 0;
+}
+.mc-cred legend {
+  padding: 0 4px;
+  font-size: var(--fs-12);
+  font-weight: 600;
+  color: var(--text-3);
+}
+.mc-cred .seg {
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+.mc-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  align-items: center;
+}
+.mc-uses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}

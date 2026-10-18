@@ -1,0 +1,54 @@
+/* W3 geometry library: sketch / plane forms and the part-template dialog. */
+
+.ws-geo-plane,
+.ws-geo-sketch,
+.ws-geo-loop {
+  display: grid;
+  gap: 6px;
+}
+
+.ws-geo-seg,
+.ws-geo-hole {
+  display: grid;
+  gap: 4px;
+  padding-left: 8px;
+  border-left: 2px solid var(--line);
+}
+
+.ws-tpl {
+  display: grid;
+  grid-template-columns: minmax(150px, 210px) minmax(0, 1fr);
+  gap: 16px;
+}
+
+.ws-tpl-list {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  max-height: 62vh;
+  overflow: auto;
+}
+
+.ws-tpl-item {
+  width: 100%;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.ws-tpl-item.active {
+  background: var(--surface-2);
+  color: var(--accent);
+}
+
+.ws-tpl-form {
+  min-width: 0;
+}
+
+@media (max-width: 640px) {
+  .ws-tpl {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ws-tpl-list {
+    max-height: 30vh;
+  }
+}

@@ -1,0 +1,77 @@
+/* Saved answers read as documents; generated artifacts keep their existing result cards. */
+.as-msg-text.as-markdown {
+  min-width: 0;
+  max-width: 100%;
+  color: var(--text-2);
+  font-size: var(--fs-14);
+  line-height: 1.8;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.as-markdown > :first-child { margin-top: 0; }
+.as-markdown > :last-child { margin-bottom: 0; }
+.as-markdown p { margin: 0 0 .85em; white-space: pre-line; }
+.as-markdown :is(h1, h2, h3, h4, h5, h6) {
+  margin: 1.3em 0 .6em;
+  color: var(--text);
+  font-weight: 650;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+.as-markdown h1 { font-size: var(--fs-20); }
+.as-markdown h2 { font-size: var(--fs-16); }
+.as-markdown :is(h3, h4, h5, h6) { font-size: var(--fs-14); }
+.as-markdown strong { color: var(--text); font-weight: 600; }
+.as-markdown :is(ul, ol) { margin: .6em 0 1em; padding-inline-start: 1.6em; }
+.as-markdown li { padding-inline-start: .2em; margin-block: .35em; }
+.as-markdown li::marker { color: var(--text-3); }
+.as-markdown ol > li::marker { font-weight: 600; font-variant-numeric: tabular-nums; }
+.as-markdown li > :is(ul, ol) { margin: .4em 0 .6em; }
+.as-markdown li > p { margin-bottom: .4em; }
+.as-markdown li > :last-child { margin-bottom: 0; }
+.as-markdown blockquote {
+  margin: 1em 0;
+  padding: .15em 0 .15em 1em;
+  border-inline-start: 3px solid var(--line-2);
+  color: var(--text-2);
+}
+.as-markdown blockquote > :last-child { margin-bottom: 0; }
+.as-markdown a { color: var(--measure); text-decoration: underline; text-underline-offset: .2em; }
+.as-markdown a:hover { text-decoration-thickness: 2px; }
+.as-markdown code { font-size: .9em; background: var(--surface-3); }
+.as-markdown pre {
+  max-width: 100%;
+  margin: 1em 0;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-1);
+  background: var(--bg-2);
+  overflow-x: auto;
+  white-space: pre;
+  overflow-wrap: normal;
+  line-height: 1.6;
+  tab-size: 4;
+}
+.as-markdown pre > code { padding: 0; background: none; border-radius: 0; }
+.as-markdown-table { max-width: 100%; margin: 1em 0; overflow-x: auto; }
+.as-markdown-table table { min-width: 100%; width: max-content; border-collapse: collapse; font-size: var(--fs-13); }
+.as-markdown-table :is(th, td) { max-width: 32rem; padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.as-markdown-table th { color: var(--text); background: var(--surface-2); font-weight: 600; text-align: start; }
+.as-markdown hr { margin: 1.4em 0; border: 0; border-top: 1px solid var(--line); }
+.as-markdown .contains-task-list { list-style: none; padding-inline-start: .2em; }
+.as-markdown .task-list-item > input { margin: 0 .5em 0 0; accent-color: var(--measure); }
+.as-markdown-image { color: var(--text-3); font-style: italic; }
+
+.as-journey-answer[data-answer-role="delivery"] { gap: 12px; padding-top: 18px; }
+.as-journey-answer[data-answer-role="delivery"] > h3 { font-size: var(--fs-16); color: var(--text); font-weight: 650; }
+.as-journey-answer[data-answer-role="delivery"] > .as-msg { gap: 10px; }
+.as-journey-answer[data-answer-role="delivery"] .as-markdown > p:first-child { color: var(--text); }
+.as-journey-answer[data-answer-role="delivery"] .as-markdown > ol > li { margin-block: 1.1em; padding-inline-start: .35em; }
+.as-journey-answer[data-answer-role="delivery"] .as-markdown > ol > li::marker { color: var(--accent); }
+.as-journey-answer[data-answer-role="delivery"] .as-followups { margin-top: 6px; }
+
+@media (max-width: 767px) {
+  .as-markdown :is(ul, ol) { padding-inline-start: 1.4em; }
+  .as-markdown pre { padding: 10px; }
+  .as-markdown-table :is(th, td) { padding: 8px; }
+}

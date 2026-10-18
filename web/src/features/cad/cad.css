@@ -1,0 +1,252 @@
+/* CAD AI surfaces: verdict chips, requirement tables, drawing packages, AI-call ledger.
+   Uses the shared tokens only; everything wraps or scrolls inside its own box at 375 px. */
+
+.cad-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  min-width: 0;
+}
+.cad-chips .chip {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cad-block {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  background: var(--surface-2);
+  font-size: var(--fs-13);
+}
+.cad-block-h {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  font-weight: 600;
+}
+.cad-block-h > svg {
+  width: 15px;
+  height: 15px;
+  color: var(--text-3);
+  flex: none;
+}
+.cad-kv {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 2px 10px;
+  margin: 0;
+}
+.cad-kv dt {
+  color: var(--text-3);
+}
+.cad-kv dd {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.cad-list {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 2px;
+}
+.cad-list li {
+  overflow-wrap: anywhere;
+}
+.cad-sub {
+  font-size: var(--fs-12);
+  color: var(--text-3);
+  font-weight: 600;
+  text-transform: none;
+}
+
+/* requirement table */
+.cad-req-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  background: var(--surface);
+  max-width: 100%;
+}
+.cad-req {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: var(--fs-12);
+}
+.cad-req th,
+.cad-req td {
+  text-align: left;
+  vertical-align: top;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--line);
+}
+.cad-req thead th {
+  color: var(--text-3);
+  font-weight: 600;
+  background: var(--surface-2);
+  white-space: nowrap;
+}
+.cad-req tbody tr:last-child td {
+  border-bottom: 0;
+}
+.cad-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 8px;
+}
+.cad-facts span {
+  white-space: nowrap;
+}
+.cad-quote {
+  display: block;
+  color: var(--text-2);
+  overflow-wrap: anywhere;
+}
+.cad-item {
+  display: flex;
+  gap: 4px;
+  align-items: flex-start;
+}
+.cad-item svg {
+  width: 13px;
+  height: 13px;
+  flex: none;
+  margin-top: 2px;
+}
+.cad-item.ok svg {
+  color: var(--ok);
+}
+.cad-item.err svg {
+  color: var(--err);
+}
+.cad-item.pending svg {
+  color: var(--pending);
+}
+
+/* drawing package */
+.cad-pages {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 8px 12px 0;
+}
+.cad-page-btn {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  max-width: 100%;
+  padding: 4px 10px;
+  border-radius: var(--r-1);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  font-size: var(--fs-13);
+  cursor: pointer;
+}
+.cad-page-btn[aria-pressed='true'] {
+  background: var(--accent-soft);
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+}
+.cad-page-btn .cad-page-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 220px;
+}
+.cad-files {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+.cad-pkg-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  align-items: center;
+  padding: 8px 12px 0;
+}
+.cad-pkg-bar .grow {
+  flex: 1 1 auto;
+}
+.cad-pkg-checks {
+  margin: 8px;
+}
+
+/* section picker */
+.cad-section {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+.cad-section-plane {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 6px;
+}
+.cad-section-plane label {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+.cad-section-plane .select,
+.cad-section-plane .input {
+  width: 100%;
+  min-width: 0;
+}
+.cad-section-plane .field-error {
+  grid-column: 1 / -1;
+}
+
+/* import dialog profile form */
+.cad-profile-form {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.cad-profile-form .cad-span {
+  grid-column: 1 / -1;
+}
+.cad-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+/* ledger */
+.cad-ledger summary {
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.cad-ledger .table-wrap {
+  margin-top: 8px;
+}
+.cad-ledger table {
+  min-width: 640px;
+}
+
+@media (max-width: 767px) {
+  .cad-profile-form,
+  .cad-section-plane {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cad-kv {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cad-kv dt {
+    margin-top: 4px;
+  }
+}

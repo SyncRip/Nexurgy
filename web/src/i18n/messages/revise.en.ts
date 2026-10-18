@@ -1,0 +1,31 @@
+// English messages of the generation supplement package I (A-04: revise a spec version with new material, continue a
+// request whose spec step could not read a source with another file; E2E-02), merged into en.ts. Keys must match
+// revise.zh.ts.
+export const reviseEn = {
+  'rv.choice.revise': 'Make a new spec version',
+  'rv.choice.reviseHint': 'A new version of this spec: its sources are read again with the new files; the request text is the revision note.',
+  'rv.choice.keep': 'Build from this spec version',
+  'rv.choice.keepHint': 'The exact spec version is used; the new files and change requests are left out (the card lists them).',
+  'rv.card.revise': 'New version of the referenced spec with: {files}',
+  'rv.card.reviseNote': 'the request text as the revision note',
+  'rv.card.keep': 'Built from the exact spec version; not used: {files}',
+  'rv.card.keepText': 'the change requests in the text',
+  'rv.card.inputRevision': 'Continued with other files (#{n}): added {added}; not read again: {dropped}',
+  'rv.none': '—',
+  'rv.replace.title': 'Continue with another file',
+  'rv.replace.hint': 'Choose the file(s) to use instead of the ones that could not be read. The spec step runs again in the same run (a new spec version); what is done is kept.',
+  'rv.replace.pick': 'Files referenced in this conversation:',
+  'rv.replace.none': 'No other file is referenced in this conversation yet: add the readable file from the project files, then come back.',
+  'rv.replace.go': 'Continue with these files',
+  'rv.replace.going': 'Continuing…',
+  'rv.src.note': 'Revision note',
+  'rv.spec.revised': 'Revised from v{of}: added {added}{note}',
+  'rv.spec.revisedNote': '; with a revision note',
+  'rv.spec.replaced': 'Read again from v{of} with replaced sources: added {added}; dropped {dropped}',
+  'wf.param.revise': 'Revise: a new version of the spec with the new material',
+  'as.err.input_unchanged': 'These files are already the input in force; choose a different file.',
+  'as.err.not_replaceable': 'This failure is not fixed by another file.',
+  'as.err.files_required': 'Choose at least one file.',
+  'as.reason.dropped_keep_spec': 'left out: built from the exact spec version',
+  'as.reason.unread_replaced': 'could not be read; replaced',
+} as const;

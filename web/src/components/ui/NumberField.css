@@ -1,0 +1,106 @@
+/* NumberField skin (NumberField.tsx). The group draws the input box so the
+   steppers and unit sit inside one bordered control. */
+
+.pr-number {
+  display: inline-flex;
+  min-width: 0;
+}
+.pr-number__group {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  height: var(--control-h-md);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-surface);
+  overflow: hidden;
+  transition: border-color var(--dur-fast) var(--ease);
+}
+.pr-number--sm .pr-number__group {
+  height: var(--control-h-sm);
+}
+.pr-number__group:hover:not([data-disabled]) {
+  border-color: var(--color-text-tertiary);
+}
+.pr-number__group:focus-within {
+  border-color: var(--measure);
+  box-shadow: 0 0 0 3px var(--measure-soft);
+}
+.pr-number__group:has(.pr-number__input[aria-invalid='true']) {
+  border-color: var(--err);
+}
+.pr-number__group[data-disabled] {
+  opacity: 0.6;
+}
+.pr-number__input {
+  flex: 1;
+  min-width: 0;
+  padding: 0 var(--sp-2);
+  border: 0;
+  background: transparent;
+  color: var(--color-text-primary);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: var(--leading-sm);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+.pr-number--sm .pr-number__input {
+  font-size: var(--text-xs);
+  line-height: var(--leading-xs);
+}
+/* The group shows the focus ring; the bare input must not draw a second one. */
+.pr-number__input:focus,
+.pr-number__input:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+.pr-number__input::placeholder {
+  color: var(--color-text-tertiary);
+}
+.pr-number__unit {
+  display: inline-flex;
+  align-items: center;
+  padding-right: var(--sp-2);
+  color: var(--color-text-tertiary);
+  font-size: var(--text-xs);
+  line-height: var(--leading-xs);
+  user-select: none;
+}
+.pr-number__step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: var(--control-h-sm);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+.pr-number__step:first-child {
+  border-right: 1px solid var(--color-border-subtle);
+}
+.pr-number__step:last-child {
+  border-left: 1px solid var(--color-border-subtle);
+}
+.pr-number--sm .pr-number__step {
+  width: 22px;
+}
+.pr-number__step svg {
+  width: 13px;
+  height: 13px;
+}
+.pr-number__step:hover:not([data-disabled]) {
+  background: var(--color-bg-hover);
+  color: var(--color-text-primary);
+}
+.pr-number__step[data-disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+:root[data-motion='reduced'] .pr-number__group {
+  transition: none;
+}

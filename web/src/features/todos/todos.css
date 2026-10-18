@@ -1,0 +1,6 @@
+.todo-popover { width: min(420px, calc(100vw - 40px)); max-height: min(70vh, 560px); overflow: auto; padding: 12px; }
+.todo-popover .wb-todo { list-style: none; margin: 0; padding: 0; }
+.todo-popover .wb-todo-row { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); color: var(--text); text-decoration: none; }
+.todo-popover .wb-todo-main { display: grid; gap: 4px; min-width: 0; flex: 1; overflow-wrap: anywhere; }
+.todo-popover .wb-todo-row > span:last-child { display: grid; align-content: start; gap: 8px; }
+.todo-popover .wb-todo-row > span:last-child > svg { width: 16px; height: 16px; }

@@ -1,0 +1,197 @@
+/* Card and Panel skin (Card.tsx). Card states come from data-interactive /
+   data-selected / data-status; Panel collapse from Base UI Collapsible
+   ([data-panel-open] on the trigger, --collapsible-panel-height on the body). */
+
+.pr-card {
+  --pr-card-edge: transparent;
+  position: relative;
+  min-width: 0;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  box-shadow: var(--elev-0);
+  text-decoration: none;
+  transition:
+    border-color var(--dur-fast) var(--ease),
+    box-shadow var(--dur-mid) var(--ease);
+}
+.pr-card--pad-sm {
+  padding: var(--sp-3);
+}
+.pr-card--pad-md {
+  padding: var(--sp-4);
+}
+
+/* Interactive: lift + brand glow on hover (presentation feel). */
+.pr-card[data-interactive] {
+  cursor: pointer;
+  transition:
+    border-color var(--dur-fast) var(--ease),
+    box-shadow var(--dur-mid) var(--ease),
+    transform var(--dur-fast) var(--ease-out);
+}
+.pr-card[data-interactive]:hover {
+  border-color: transparent;
+  box-shadow: var(--glow-brand), var(--elev-3);
+  transform: translateY(-2px);
+}
+:root[data-motion='reduced'] .pr-card[data-interactive]:hover {
+  transform: none;
+}
+.pr-card:focus-visible {
+  outline: none;
+  box-shadow: var(--color-focus-ring);
+  border-radius: var(--radius-lg);
+}
+
+/* Selected: a 2px accent outline drawn with border + inset ring, so the
+   layout does not shift. */
+.pr-card[data-selected] {
+  border-color: var(--color-action-primary);
+  box-shadow: inset 0 0 0 1px var(--color-action-primary);
+}
+.pr-card[data-selected][data-interactive]:hover {
+  border-color: var(--color-action-primary);
+  box-shadow:
+    inset 0 0 0 1px var(--color-action-primary),
+    var(--elev-2);
+}
+.pr-card[data-selected]:focus-visible {
+  box-shadow:
+    inset 0 0 0 1px var(--color-action-primary),
+    var(--color-focus-ring);
+}
+
+/* Status edge: supplements the chip/text inside the card. */
+.pr-card[data-status]::before {
+  content: '';
+  position: absolute;
+  inset: var(--sp-2) auto var(--sp-2) -1px;
+  width: 3px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: var(--pr-card-edge);
+  pointer-events: none;
+}
+.pr-card[data-status='ok'] {
+  --pr-card-edge: var(--ok);
+}
+.pr-card[data-status='warn'] {
+  --pr-card-edge: var(--warn);
+}
+.pr-card[data-status='err'] {
+  --pr-card-edge: var(--err);
+}
+.pr-card[data-status='running'],
+.pr-card[data-status='info'] {
+  --pr-card-edge: var(--measure);
+}
+.pr-card[data-status='pending'] {
+  --pr-card-edge: var(--pending);
+}
+.pr-card[data-status='stale'] {
+  --pr-card-edge: var(--stale);
+}
+
+/* Panel */
+.pr-panel {
+  min-width: 0;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-surface);
+}
+.pr-panel__head {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-height: 44px;
+  padding: var(--sp-2) var(--sp-4);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+.pr-panel__titles {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+}
+.pr-panel__title {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: var(--leading-sm);
+  font-weight: var(--weight-strong);
+  letter-spacing: 0;
+}
+.pr-panel__subtitle {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--text-xs);
+  line-height: var(--leading-xs);
+}
+.pr-panel__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+  flex: none;
+}
+.pr-panel__body {
+  padding: var(--sp-4);
+}
+.pr-panel__body--flush {
+  padding: 0;
+}
+.pr-panel__foot {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-4);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+/* Collapsible header: the title itself is the toggle. */
+.pr-panel__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1_5);
+  max-width: 100%;
+  margin: 0 calc(-1 * var(--sp-1));
+  padding: var(--sp-0_5) var(--sp-1);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.pr-panel__toggle:hover {
+  background: var(--color-bg-hover);
+}
+.pr-panel__chevron {
+  width: 15px;
+  height: 15px;
+  flex: none;
+  color: var(--color-text-tertiary);
+  transform: rotate(-90deg);
+  transition: transform var(--dur-fast) var(--ease);
+}
+.pr-panel__toggle[data-panel-open] .pr-panel__chevron {
+  transform: none;
+}
+/* Closed: the header keeps its own bottom border off. */
+.pr-panel:has(> .pr-panel__head .pr-panel__toggle:not([data-panel-open])) > .pr-panel__head {
+  border-bottom-color: transparent;
+}
+.pr-panel__collapse {
+  height: var(--collapsible-panel-height);
+  overflow: hidden;
+  transition: height var(--dur-mid) var(--ease-out);
+}
+.pr-panel__collapse[data-starting-style],
+.pr-panel__collapse[data-ending-style] {
+  height: 0;
+}
+
+:root[data-motion='reduced'] .pr-card,
+:root[data-motion='reduced'] .pr-panel__chevron,
+:root[data-motion='reduced'] .pr-panel__collapse {
+  transition: none;
+}

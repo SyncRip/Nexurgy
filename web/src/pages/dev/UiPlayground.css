@@ -1,0 +1,41 @@
+/* Layout of the dev-only /dev/ui gallery. Tokens only; no component skins here. */
+
+.dev-ui {
+  max-width: 1200px;
+}
+
+.dev-ui__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.dev-ui__stack {
+  display: grid;
+  gap: var(--sp-3);
+}
+
+.dev-ui__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--sp-3);
+}
+
+.dev-ui .pr-panel__body {
+  display: grid;
+  gap: var(--sp-4);
+}
+
+.dev-ui__note {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+}
+
+.dev-ui__canvas {
+  height: 320px;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}

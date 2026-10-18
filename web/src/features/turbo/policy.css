@@ -1,0 +1,112 @@
+/* S5: policy source note, "confirm these assumptions" list and the project's default Turbo switch. */
+
+.pol-field {
+  min-width: 0;
+}
+.pol-note {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  font-size: var(--fs-12);
+  color: var(--text-2);
+}
+.pol-note-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  min-width: 0;
+}
+.pol-note-line > svg {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  color: var(--text-3);
+}
+.pol-note-source {
+  overflow-wrap: anywhere;
+}
+.pol-cons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  padding: 6px 8px;
+  border-radius: var(--r-1);
+  background: var(--bg-2);
+  color: var(--text-2);
+  min-width: 0;
+}
+.pol-cons > svg {
+  flex: none;
+  width: 14px;
+  height: 14px;
+}
+.pol-cons.confirm_required,
+.pol-cons.corrected {
+  background: var(--warn-soft);
+  color: var(--text);
+}
+.pol-cons .grow {
+  min-width: 12ch;
+  overflow-wrap: anywhere;
+}
+.pol-upstream,
+.pol-confirm {
+  min-width: 0;
+}
+.pol-owner {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+.pol-upstream .tb-assumptions li[data-state='confirmed'] {
+  border-left-color: var(--ok);
+}
+.pol-upstream .tb-assumptions li[data-state='corrected'] {
+  border-left-color: var(--err);
+}
+.pol-switch {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 4px 10px;
+  align-items: start;
+  padding: 10px 12px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-2);
+  background: var(--surface);
+  min-width: 0;
+}
+.pol-switch input {
+  margin-top: 3px;
+}
+.pol-switch-title {
+  font-weight: 600;
+  font-size: var(--fs-13);
+  overflow-wrap: anywhere;
+}
+.pol-switch-title svg {
+  width: 14px;
+  height: 14px;
+  vertical-align: -2px;
+  color: var(--warn);
+}
+.pol-switch-desc {
+  grid-column: 2;
+  color: var(--text-3);
+  font-size: var(--fs-12);
+  overflow-wrap: anywhere;
+}
+
+.pol-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.pol-tag svg {
+  flex: none;
+  width: 12px;
+  height: 12px;
+}

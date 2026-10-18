@@ -1,0 +1,43 @@
+.agent-role {
+  --role-color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  max-width: 100%;
+  padding: 4px 7px;
+  border: 1px solid color-mix(in srgb, var(--role-color) 20%, transparent);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--role-color) 7%, var(--surface));
+  color: var(--text-2);
+  font-size: var(--fs-12);
+  font-weight: 600;
+  line-height: 1.45;
+  vertical-align: middle;
+}
+.agent-role.compact { padding: 2px 5px; font-size: var(--fs-11); }
+.agent-role[data-engineering-role='design'],
+.agent-role[data-engineering-role='drawing'] { --role-color: var(--measure); }
+.agent-role[data-engineering-role='modeling'],
+.agent-role[data-engineering-role='assembly'] { --role-color: var(--measure); }
+.agent-role[data-engineering-role='process'],
+.agent-role[data-engineering-role='quote'] { --role-color: var(--text-3); }
+.agent-role > svg { width: 14px; height: 14px; flex: none; color: var(--role-color); }
+.agent-role-name { overflow-wrap: anywhere; }
+.agent-role-ai { flex: none; color: var(--text-3); font-size: 9px; font-weight: 500; letter-spacing: .04em; }
+.agent-coordination { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 4px; min-width: 0; color: var(--text-3); font-size: var(--fs-11); }
+.engineering-team { position: relative; min-width: 0; min-height: 38px; max-height: min(400px, 42vh); flex: 0 1 auto; overflow-y: auto; border-bottom: 1px solid var(--line); background: var(--surface); }
+.engineering-team > summary { position: sticky; top: 0; z-index: 1; display: flex; align-items: center; gap: 8px; min-height: 38px; padding: 6px 12px; cursor: pointer; list-style: none; background: var(--surface); }
+.engineering-team > summary::-webkit-details-marker { display: none; }
+.engineering-team > summary:focus-visible { outline: none; box-shadow: inset 0 0 0 2px var(--measure); }
+.engineering-team-title { margin-left: auto; color: var(--text-2); font-size: var(--fs-12); }
+.engineering-team-chevron { width: 14px; height: 14px; flex: none; color: var(--text-3); }
+.engineering-team[open] .engineering-team-chevron { transform: rotate(180deg); }
+.engineering-team-body { position: relative; padding: 2px 12px 12px; }
+.engineering-team-intro { margin: 0 0 10px; color: var(--text-2); font-size: var(--fs-12); line-height: 1.6; }
+.engineering-team-members { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 10px 16px; padding: 0; margin: 0; list-style: none; }
+.engineering-team-members li { min-width: 0; }
+.engineering-team-members p { margin: 4px 0 0; font-size: var(--fs-12); line-height: 1.5; color: var(--text-2); }
+.engineering-team-note { margin: 10px 0 0; font-size: var(--fs-11); line-height: 1.5; color: var(--text-3); }
+.as-start-intro > .agent-role { margin-bottom: 10px; }
+.as-journey-current { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }

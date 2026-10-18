@@ -1,0 +1,131 @@
+/* Button skin (Button.tsx). Heights come from --control-h-*; states from
+   Base UI data attributes ([data-disabled]) plus our [data-loading]. */
+
+.pr-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--control-h-md);
+  padding: 0 var(--sp-3);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-raised);
+  color: var(--color-text-primary);
+  font-size: var(--text-sm);
+  line-height: var(--leading-sm);
+  font-weight: var(--weight-medium);
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease);
+}
+.pr-btn__content {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1_5);
+}
+.pr-btn svg {
+  width: 15px;
+  height: 15px;
+  flex: none;
+}
+.pr-btn:hover:not([data-disabled]) {
+  background: var(--color-bg-hover);
+  border-color: var(--color-text-tertiary);
+}
+.pr-btn[data-disabled] {
+  cursor: not-allowed;
+}
+.pr-btn[data-disabled]:not([data-loading]) {
+  opacity: 0.45;
+}
+
+/* Variants */
+.pr-btn--primary {
+  background: var(--color-action-primary);
+  border-color: var(--color-action-primary);
+  color: var(--color-action-primary-ink);
+  font-weight: var(--weight-strong);
+}
+.pr-btn--primary:hover:not([data-disabled]) {
+  background: var(--color-action-primary-hover);
+  border-color: var(--color-action-primary-hover);
+}
+.pr-btn--ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--color-text-secondary);
+}
+.pr-btn--ghost:hover:not([data-disabled]) {
+  background: var(--color-bg-hover);
+  border-color: transparent;
+  color: var(--color-text-primary);
+}
+.pr-btn--danger {
+  background: var(--err);
+  border-color: var(--err);
+  color: var(--on-solid);
+  font-weight: var(--weight-strong);
+}
+.pr-btn--danger:hover:not([data-disabled]) {
+  background: var(--err);
+  border-color: var(--err);
+  filter: brightness(1.08);
+}
+
+/* Sizes */
+.pr-btn--sm {
+  height: var(--control-h-sm);
+  padding: 0 var(--sp-2);
+  font-size: var(--text-xs);
+  line-height: var(--leading-xs);
+}
+.pr-btn--lg {
+  height: var(--control-h-lg);
+  padding: 0 var(--sp-4);
+  font-size: var(--text-md);
+  line-height: var(--leading-md);
+}
+.pr-btn--icon-only {
+  width: var(--control-h-md);
+  padding: 0;
+}
+.pr-btn--icon-only.pr-btn--sm {
+  width: var(--control-h-sm);
+}
+.pr-btn--icon-only.pr-btn--lg {
+  width: var(--control-h-lg);
+}
+
+/* Loading: the label stays in the layout (width unchanged) but fades out. */
+.pr-btn[data-loading] {
+  cursor: progress;
+}
+.pr-btn[data-loading] .pr-btn__content {
+  opacity: 0;
+}
+.pr-btn__spinner {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 14px;
+  height: 14px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: var(--radius-full);
+  animation: pr-btn-spin 0.8s linear infinite;
+}
+@keyframes pr-btn-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+:root[data-motion='reduced'] .pr-btn {
+  transition: none;
+}
+:root[data-motion='reduced'] .pr-btn__spinner {
+  animation-duration: 2.4s;
+}

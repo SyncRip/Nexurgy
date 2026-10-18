@@ -1,0 +1,27 @@
+# Local configuration and credentials.
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+*.pem
+*.key
+
+# Dependencies and generated files.
+**/node_modules/
+**/.venv/
+**/__pycache__/
+**/.pytest_cache/
+**/.cache/
+**/dist/
+**/coverage/
+**/*.pyc
+**/*.tsbuildinfo
+**/*.egg-info/
+**/*.log
+.DS_Store
+
+# Local application data and database backups.
+/server/var/
+/backups/
