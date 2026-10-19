@@ -16,6 +16,7 @@ Choose the guide for your environment:
 
 - [Local deployment guideline](local-deploy-guideline.md): local setup, common use cases, supported inputs, and result interpretation.
 - [GCP demo guideline](gcp-deploy-guideline.md): hosted demo access, Turbo mode, and a first modeling task.
+- [AI Builder Cup judges' guide](ai-builder-cup-judges-guide.md): an illustrated walkthrough of the prepared toy car example and its CAD deliverables.
 
 ## How the local version works
 
